@@ -1287,3 +1287,30 @@
 [data-theme="dark"] .expense-mobile-card .mobile-card-grid > div {
   background: transparent !important;
 }
+
+/* ============================================
+   PAYMENT METHOD - ENSURE VISIBLE TEXT IN LIGHT MODE
+   ============================================ */
+
+.payment-method {
+  color: #2c3e50 !important;
+}
+
+.payment-method svg {
+  color: #7f8c8d !important;
+}
+
+.expense-mobile-card .payment-method {
+  background: #f0f4f8;
+  color: #2c3e50 !important;
+}
+
+[data-theme="dark"] .expense-mobile-card .payment-method {
+  background: #34495e !important;
+  color: #ecf0f1 !important;
+}
+
+[data-theme="dark"] .payment-method {
+  background: #34495e !important;
+  color: #ecf0f1 !important;
+}

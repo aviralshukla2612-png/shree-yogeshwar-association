@@ -300,3 +300,65 @@
 [data-theme="dark"] .card:last-child.positive { background: #1a3d1a; border-bottom: 4px solid #27ae60; }
 [data-theme="dark"] .card:last-child.positive .card-value { color: #27ae60; }
 
+
+/* ============================================
+   DASHBOARD CARDS - 3 cols x 2 rows on mobile
+   ============================================ */
+
+@media (max-width: 600px) {
+  .dashboard-cards {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 0.5rem !important;
+  }
+
+  .card {
+    padding: 0.65rem 0.5rem;
+    min-height: 80px;
+    flex-direction: column;
+    align-items: flex-start;
+    border-radius: 10px;
+  }
+
+  .card-icon {
+    width: 32px;
+    height: 32px;
+    margin-bottom: 0.2rem;
+  }
+
+  .card-icon svg {
+    font-size: 0.9rem;
+  }
+
+  .card-value {
+    font-size: clamp(0.85rem, 4vw, 1rem);
+  }
+
+  .card-content h3 {
+    font-size: 0.55rem;
+    letter-spacing: 0.3px;
+  }
+
+  .card-subtitle {
+    font-size: 0.5rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .dashboard-cards {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 0.35rem !important;
+  }
+
+  .card {
+    padding: 0.5rem 0.4rem;
+    min-height: 70px;
+  }
+
+  .card-value {
+    font-size: 0.8rem;
+  }
+
+  .card-content h3 {
+    font-size: 0.48rem;
+  }
+}
