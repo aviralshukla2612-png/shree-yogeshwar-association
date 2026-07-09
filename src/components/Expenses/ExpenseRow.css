@@ -1,0 +1,366 @@
+/* ExpenseRow.css - Updated Version */
+
+.expense-row {
+  transition: background 0.2s ease;
+}
+
+.expense-row:hover {
+  background: #f8f9fa;
+}
+
+.expense-row.editing {
+  background: #e8f0fe !important;
+  border-left: 3px solid #3498db;
+}
+
+/* Category Badge */
+.category-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 20px;
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.category-badge svg {
+  font-size: 0.6rem;
+}
+
+/* Select Dropdown */
+.category-select {
+  padding: 0.2rem 0.4rem;
+  border: 2px solid #3498db;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  background: white;
+  color: #2c3e50;
+  cursor: pointer;
+  width: 100%;
+  min-width: 80px;
+}
+
+.category-select:focus {
+  outline: none;
+  border-color: #27ae60;
+}
+
+/* Edit Inputs */
+.edit-input {
+  padding: 0.2rem 0.4rem;
+  border: 2px solid #3498db;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  background: white;
+  color: #2c3e50;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.edit-input:focus {
+  outline: none;
+  border-color: #27ae60;
+  box-shadow: 0 0 0 2px rgba(39, 174, 96, 0.1);
+}
+
+.amount-input {
+  max-width: 100px;
+  text-align: right;
+}
+
+.date-input {
+  max-width: 130px;
+}
+
+.description-input {
+  min-width: 120px;
+}
+
+/* Amount Cell */
+.amount-cell {
+  font-weight: 600;
+  text-align: right;
+  color: #2c3e50;
+}
+
+.description-cell {
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #7f8c8d;
+}
+
+/* Action Buttons */
+.action-buttons {
+  display: flex;
+  gap: 0.3rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0.2rem 0.5rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.action-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+.action-btn svg {
+  font-size: 0.7rem;
+}
+
+.action-btn.edit {
+  background: #ebf5fb;
+  color: #3498db;
+}
+
+.action-btn.edit:hover {
+  background: #3498db;
+  color: white;
+}
+
+.action-btn.delete {
+  background: #fdedec;
+  color: #e74c3c;
+}
+
+.action-btn.delete:hover {
+  background: #e74c3c;
+  color: white;
+}
+
+.action-btn.save {
+  background: #eafaf1;
+  color: #27ae60;
+}
+
+.action-btn.save:hover {
+  background: #27ae60;
+  color: white;
+}
+
+.action-btn.cancel {
+  background: #f8f9fa;
+  color: #95a5a6;
+}
+
+.action-btn.cancel:hover {
+  background: #95a5a6;
+  color: white;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 768px) {
+  .expense-row td {
+    padding: 0.3rem 0.4rem;
+  }
+
+  .category-badge {
+    font-size: 0.6rem;
+    padding: 0.15rem 0.4rem;
+  }
+
+  .category-badge svg {
+    font-size: 0.5rem;
+  }
+
+  .edit-input {
+    font-size: 0.7rem;
+    padding: 0.15rem 0.3rem;
+  }
+
+  .amount-input {
+    max-width: 80px;
+  }
+
+  .date-input {
+    max-width: 110px;
+  }
+
+  .description-input {
+    min-width: 80px;
+  }
+
+  .action-btn {
+    font-size: 0.6rem;
+    padding: 0.15rem 0.4rem;
+  }
+
+  .action-btn svg {
+    font-size: 0.6rem;
+  }
+
+  .description-cell {
+    max-width: 120px;
+  }
+}
+
+@media (max-width: 480px) {
+  .expense-row td {
+    padding: 0.2rem 0.3rem;
+    display: block;
+    text-align: left;
+  }
+
+  .expense-row td::before {
+    content: attr(data-label);
+    display: inline-block;
+    font-weight: 600;
+    font-size: 0.6rem;
+    color: #7f8c8d;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    margin-right: 0.5rem;
+    min-width: 70px;
+  }
+
+  .expense-row td:last-child::before {
+    min-width: 50px;
+  }
+
+  .category-badge {
+    font-size: 0.55rem;
+    padding: 0.1rem 0.3rem;
+  }
+
+  .amount-cell {
+    text-align: left;
+  }
+
+  .amount-input {
+    max-width: 70px;
+  }
+
+  .date-input {
+    max-width: 100px;
+  }
+
+  .description-input {
+    min-width: 60px;
+  }
+
+  .description-cell {
+    max-width: unset;
+  }
+
+  .action-buttons {
+    justify-content: flex-start;
+  }
+
+  .action-btn {
+    font-size: 0.55rem;
+    padding: 0.1rem 0.3rem;
+  }
+
+  .action-btn svg {
+    font-size: 0.55rem;
+  }
+}
+
+/* ============================================
+   DARK MODE
+   ============================================ */
+
+@media (prefers-color-scheme: dark) {
+  .expense-row:hover {
+    background: #34495e;
+  }
+
+  .expense-row.editing {
+    background: #1a2a3a !important;
+  }
+
+  .category-select {
+    background: #2c3e50;
+    border-color: #46637a;
+    color: #ecf0f1;
+  }
+
+  .category-select:focus {
+    border-color: #27ae60;
+  }
+
+  .edit-input {
+    background: #2c3e50;
+    border-color: #46637a;
+    color: #ecf0f1;
+  }
+
+  .edit-input:focus {
+    border-color: #27ae60;
+  }
+
+  .amount-cell {
+    color: #ecf0f1;
+  }
+
+  .description-cell {
+    color: #95a5a6;
+  }
+
+  .action-btn.edit {
+    background: #1a2a3a;
+    color: #3498db;
+  }
+
+  .action-btn.edit:hover {
+    background: #3498db;
+    color: white;
+  }
+
+  .action-btn.delete {
+    background: #2a1a1a;
+    color: #e74c3c;
+  }
+
+  .action-btn.delete:hover {
+    background: #e74c3c;
+    color: white;
+  }
+
+  .action-btn.save {
+    background: #1a2a1a;
+    color: #27ae60;
+  }
+
+  .action-btn.save:hover {
+    background: #27ae60;
+    color: white;
+  }
+
+  .action-btn.cancel {
+    background: #2a2a2a;
+    color: #95a5a6;
+  }
+
+  .action-btn.cancel:hover {
+    background: #95a5a6;
+    color: white;
+  }
+
+  .category-badge {
+    color: #1a1a1a !important;
+  }
+
+  .category-badge svg {
+    color: #1a1a1a !important;
+  }
+}

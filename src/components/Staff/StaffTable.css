@@ -1,0 +1,799 @@
+/* StaffTable.css - Compact Version */
+
+.staff-table-container {
+  background: white;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  animation: fadeIn 0.3s ease;
+  width: 100%;
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
+
+.staff-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.staff-header h2 {
+  margin: 0;
+  color: #2c3e50;
+  font-size: 1.2rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.staff-header h2 svg {
+  color: #27ae60;
+}
+
+.staff-controls {
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* Search Bar */
+.search-bar {
+  position: relative;
+  min-width: 200px;
+}
+
+.search-bar .search-icon {
+  position: absolute;
+  left: 0.8rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #95a5a6;
+  font-size: 0.85rem;
+}
+
+.search-input {
+  padding: 0.4rem 0.8rem 0.4rem 2.2rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  width: 100%;
+  transition: all 0.3s ease;
+  background: white;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #27ae60;
+  box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.1);
+}
+
+/* Add Staff Button */
+.add-staff-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 1rem;
+  background: linear-gradient(135deg, #27ae60, #219a52);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.add-staff-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+}
+
+.add-staff-btn svg {
+  font-size: 0.85rem;
+}
+
+/* ============================================
+   COMPACT STATS
+   ============================================ */
+
+.staff-stats-compact {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.8rem;
+  margin-bottom: 1rem;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.6rem 1rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.stat-item:hover {
+  background: #e9ecef;
+}
+
+.stat-icon-compact {
+  font-size: 1.2rem;
+  color: #27ae60;
+}
+
+.stat-value-compact {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2c3e50;
+  display: block;
+  line-height: 1.2;
+}
+
+.stat-label-compact {
+  font-size: 0.65rem;
+  color: #7f8c8d;
+  display: block;
+}
+
+/* ============================================
+   COMPACT STAFF GRID
+   ============================================ */
+
+.staff-grid-compact {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 0.8rem;
+}
+
+/* ============================================
+   COMPACT STAFF CARD
+   ============================================ */
+
+.staff-card-compact {
+  background: white;
+  border: 1px solid #ecf0f1;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+
+.staff-card-compact:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+/* Card Header */
+.staff-card-header-compact {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.6rem 0.8rem;
+  background: #f8f9fa;
+  border-bottom: 1px solid #ecf0f1;
+}
+
+.staff-avatar-compact {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+.staff-info-compact {
+  flex: 1;
+  min-width: 0;
+}
+
+.staff-name-compact {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #2c3e50;
+  display: block;
+  line-height: 1.2;
+}
+
+.staff-role-compact {
+  font-size: 0.7rem;
+  font-weight: 500;
+  display: block;
+}
+
+.staff-role-badge-compact {
+  display: none;
+  padding: 0.15rem 0.5rem;
+  border-radius: 12px;
+  color: white;
+  font-size: 0.6rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* Card Body */
+.staff-card-body-compact {
+  padding: 0.6rem 0.8rem;
+}
+
+.staff-details-compact {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.detail-item-compact {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  color: #2c3e50;
+  padding: 0.15rem 0;
+}
+
+.detail-item-compact .detail-icon {
+  color: #95a5a6;
+  font-size: 0.7rem;
+  width: 16px;
+  flex-shrink: 0;
+}
+
+.detail-item-compact .salary-text {
+  color: #27ae60;
+  font-weight: 600;
+}
+
+.payment-mode-compact {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  font-size: 0.75rem;
+  color: #2c3e50;
+}
+
+.payment-mode-compact svg {
+  font-size: 0.7rem;
+  color: #7f8c8d;
+}
+
+/* Edit Inputs */
+.edit-input {
+  padding: 0.15rem 0.4rem;
+  border: 2px solid #3498db;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  width: 100%;
+  background: white;
+  color: #2c3e50;
+  transition: all 0.3s ease;
+}
+
+.edit-input:focus {
+  outline: none;
+  border-color: #27ae60;
+  box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.1);
+}
+
+.name-input {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.detail-input {
+  font-size: 0.8rem;
+  flex: 1;
+  min-width: 60px;
+}
+
+/* Card Footer - Compact Actions */
+.staff-card-footer-compact {
+  display: flex;
+  gap: 0.3rem;
+  padding: 0.4rem 0.8rem;
+  background: #f8f9fa;
+  border-top: 1px solid #ecf0f1;
+}
+
+.action-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2rem;
+  padding: 0.25rem 0.5rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.action-btn svg {
+  font-size: 0.7rem;
+}
+
+.action-btn:hover {
+  transform: translateY(-1px);
+}
+
+.edit-btn {
+  background: #ebf5fb;
+  color: #3498db;
+}
+
+.edit-btn:hover {
+  background: #3498db;
+  color: white;
+}
+
+.delete-btn {
+  background: #fdedec;
+  color: #e74c3c;
+}
+
+.delete-btn:hover {
+  background: #e74c3c;
+  color: white;
+}
+
+.save-btn {
+  background: #eafaf1;
+  color: #27ae60;
+}
+
+.save-btn:hover {
+  background: #27ae60;
+  color: white;
+}
+
+.cancel-btn {
+  background: #f8f9fa;
+  color: #95a5a6;
+}
+
+.cancel-btn:hover {
+  background: #95a5a6;
+  color: white;
+}
+
+/* ============================================
+   EMPTY STATE
+   ============================================ */
+
+.staff-empty-state {
+  text-align: center;
+  padding: 2rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.staff-empty-state .empty-icon {
+  font-size: 3rem;
+  color: #95a5a6;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.staff-empty-state p {
+  color: #7f8c8d;
+  margin-bottom: 0.8rem;
+  font-size: 0.95rem;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 992px) {
+  .staff-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .staff-controls {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .search-bar {
+    width: 100%;
+    min-width: unset;
+  }
+
+  .add-staff-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .staff-grid-compact {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .staff-table-container {
+    padding: 0.6rem;
+  }
+
+  .staff-header h2 {
+    font-size: 1rem;
+  }
+
+  .staff-stats-compact {
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0.4rem;
+  }
+
+  .stat-item {
+    padding: 0.4rem 0.6rem;
+    flex-direction: column;
+    text-align: center;
+    gap: 0.2rem;
+  }
+
+  .stat-icon-compact {
+    font-size: 1rem;
+  }
+
+  .stat-value-compact {
+    font-size: 0.9rem;
+  }
+
+  .stat-label-compact {
+    font-size: 0.6rem;
+  }
+
+  .staff-grid-compact {
+    grid-template-columns: 1fr;
+    gap: 0.6rem;
+  }
+
+  .staff-card-header-compact {
+    padding: 0.4rem 0.6rem;
+  }
+
+  .staff-avatar-compact {
+    width: 30px;
+    height: 30px;
+    font-size: 0.75rem;
+  }
+
+  .staff-name-compact {
+    font-size: 0.85rem;
+  }
+
+  .staff-card-body-compact {
+    padding: 0.4rem 0.6rem;
+  }
+
+  .detail-item-compact {
+    font-size: 0.75rem;
+  }
+
+  .staff-card-footer-compact {
+    padding: 0.3rem 0.6rem;
+    flex-wrap: wrap;
+  }
+
+  .action-btn {
+    font-size: 0.65rem;
+    padding: 0.2rem 0.4rem;
+  }
+
+  .staff-role-badge-compact {
+    display: inline-block;
+  }
+}
+
+@media (max-width: 480px) {
+  .staff-table-container {
+    padding: 0.4rem;
+  }
+
+  .staff-stats-compact {
+    grid-template-columns: 1fr;
+    gap: 0.3rem;
+  }
+
+  .stat-item {
+    flex-direction: row;
+    text-align: left;
+    padding: 0.3rem 0.6rem;
+  }
+
+  .staff-header h2 {
+    font-size: 0.9rem;
+  }
+
+  .search-input {
+    font-size: 0.75rem;
+    padding: 0.3rem 0.6rem 0.3rem 1.8rem;
+  }
+
+  .add-staff-btn {
+    font-size: 0.75rem;
+    padding: 0.3rem 0.8rem;
+  }
+
+  .staff-role-badge-compact {
+    font-size: 0.55rem;
+    padding: 0.1rem 0.4rem;
+  }
+
+  .action-btn {
+    font-size: 0.6rem;
+    padding: 0.15rem 0.3rem;
+  }
+
+  .action-btn svg {
+    font-size: 0.6rem;
+  }
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================
+   DARK MODE
+   ============================================ */
+
+@media (prefers-color-scheme: dark) {
+  .staff-table-container {
+    background: #2c3e50;
+  }
+
+  .staff-header h2 {
+    color: #ecf0f1;
+  }
+
+  .search-input {
+    background: #2c3e50;
+    border-color: #46637a;
+    color: #ecf0f1;
+  }
+
+  .search-input:focus {
+    border-color: #27ae60;
+  }
+
+  .stat-item {
+    background: #34495e;
+  }
+
+  .stat-value-compact {
+    color: #ecf0f1;
+  }
+
+  .stat-label-compact {
+    color: #95a5a6;
+  }
+
+  .staff-card-compact {
+    background: #34495e;
+    border-color: #46637a;
+  }
+
+  .staff-card-header-compact {
+    background: #2c3e50;
+    border-color: #46637a;
+  }
+
+  .staff-name-compact {
+    color: #ecf0f1;
+  }
+
+  .staff-card-footer-compact {
+    background: #2c3e50;
+    border-color: #46637a;
+  }
+
+  .edit-input {
+    background: #2c3e50;
+    border-color: #46637a;
+    color: #ecf0f1;
+  }
+
+  .edit-input:focus {
+    border-color: #27ae60;
+  }
+
+  .detail-item-compact {
+    color: #ecf0f1;
+  }
+
+  .payment-mode-compact {
+    color: #ecf0f1;
+  }
+
+  .staff-empty-state {
+    background: #34495e;
+  }
+
+  .staff-empty-state p {
+    color: #95a5a6;
+  }
+
+  .edit-btn {
+    background: #1a2a3a;
+    color: #3498db;
+  }
+
+  .edit-btn:hover {
+    background: #3498db;
+    color: white;
+  }
+
+  .delete-btn {
+    background: #2a1a1a;
+    color: #e74c3c;
+  }
+
+  .delete-btn:hover {
+    background: #e74c3c;
+    color: white;
+  }
+
+  .save-btn {
+    background: #1a2a1a;
+    color: #27ae60;
+  }
+
+  .save-btn:hover {
+    background: #27ae60;
+    color: white;
+  }
+
+  .cancel-btn {
+    background: #2a2a2a;
+    color: #95a5a6;
+  }
+
+  .cancel-btn:hover {
+    background: #95a5a6;
+    color: white;
+  }
+}
+
+/* ============================================
+   DARK MODE (data-theme toggle)
+   ============================================ */
+
+[data-theme="dark"] .staff-table-container {
+  background: #2c3e50;
+}
+
+[data-theme="dark"] .staff-header h2 {
+  color: #ecf0f1;
+}
+
+[data-theme="dark"] .search-input {
+  background: #2c3e50;
+  border-color: #46637a;
+  color: #ecf0f1;
+}
+
+[data-theme="dark"] .search-input:focus {
+  border-color: #27ae60;
+}
+
+[data-theme="dark"] .stat-item {
+  background: #34495e;
+}
+
+[data-theme="dark"] .stat-value-compact {
+  color: #ecf0f1;
+}
+
+[data-theme="dark"] .stat-label-compact {
+  color: #95a5a6;
+}
+
+[data-theme="dark"] .staff-card-compact {
+  background: #34495e;
+  border-color: #46637a;
+}
+
+[data-theme="dark"] .staff-card-header-compact {
+  background: #2c3e50;
+  border-color: #46637a;
+}
+
+[data-theme="dark"] .staff-name-compact {
+  color: #ecf0f1;
+}
+
+[data-theme="dark"] .staff-card-footer-compact {
+  background: #2c3e50;
+  border-color: #46637a;
+}
+
+[data-theme="dark"] .edit-input {
+  background: #2c3e50;
+  border-color: #46637a;
+  color: #ecf0f1;
+}
+
+[data-theme="dark"] .edit-input:focus {
+  border-color: #27ae60;
+}
+
+[data-theme="dark"] .detail-item-compact {
+  color: #ecf0f1;
+}
+
+[data-theme="dark"] .payment-mode-compact {
+  color: #ecf0f1;
+}
+
+[data-theme="dark"] .staff-empty-state {
+  background: #34495e;
+}
+
+[data-theme="dark"] .staff-empty-state p {
+  color: #95a5a6;
+}
+
+[data-theme="dark"] .edit-btn {
+  background: #1a2a3a;
+  color: #3498db;
+}
+
+[data-theme="dark"] .edit-btn:hover {
+  background: #3498db;
+  color: white;
+}
+
+[data-theme="dark"] .delete-btn {
+  background: #2a1a1a;
+  color: #e74c3c;
+}
+
+[data-theme="dark"] .delete-btn:hover {
+  background: #e74c3c;
+  color: white;
+}
+
+[data-theme="dark"] .save-btn {
+  background: #1a2a1a;
+  color: #27ae60;
+}
+
+[data-theme="dark"] .save-btn:hover {
+  background: #27ae60;
+  color: white;
+}
+
+[data-theme="dark"] .cancel-btn {
+  background: #2a2a2a;
+  color: #95a5a6;
+}
+
+[data-theme="dark"] .cancel-btn:hover {
+  background: #95a5a6;
+  color: white;
+}

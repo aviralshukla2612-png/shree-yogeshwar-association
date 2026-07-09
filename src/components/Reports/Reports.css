@@ -1,0 +1,69 @@
+/* Reports.css - For standalone charts */
+
+.chart-container {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+[data-theme="dark"] .chart-container {
+  background: #2c3e50;
+}
+
+.chart-container:hover {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+.chart-container h3 {
+  margin: 0 0 1rem 0;
+  color: #2c3e50;
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+[data-theme="dark"] .chart-container h3 {
+  color: #ecf0f1;
+}
+
+.chart-container.empty-chart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+}
+
+.chart-container.empty-chart p {
+  color: #7f8c8d;
+  font-size: 1rem;
+  margin: 0.5rem 0;
+}
+
+.chart-container.empty-chart small {
+  color: #95a5a6;
+  font-size: 0.85rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .chart-container {
+    padding: 1rem;
+  }
+
+  .chart-container h3 {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .chart-container {
+    padding: 0.8rem;
+    border-radius: 8px;
+  }
+
+  .chart-container h3 {
+    font-size: 0.85rem;
+  }
+}

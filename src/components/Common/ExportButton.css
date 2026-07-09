@@ -1,0 +1,37 @@
+.export-btn {
+  background: linear-gradient(135deg, #217346, #2e8b57);
+  color: white;
+  border: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 2px 8px rgba(33, 115, 70, 0.3);
+}
+
+.export-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(33, 115, 70, 0.4);
+}
+
+.export-btn:active {
+  transform: translateY(0);
+}
+
+.export-btn::before {
+  content: '📥';
+}
+
+@media (max-width: 768px) {
+  .export-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    width: 100%;
+    justify-content: center;
+  }
+}

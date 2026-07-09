@@ -1,0 +1,489 @@
+/* ReportsDashboard.css */
+
+.reports-dashboard {
+  padding: 1.5rem;
+  background: #f5f7fa;
+  min-height: 100vh;
+}
+
+[data-theme="dark"] .reports-dashboard {
+  background: #1a2a3a;
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
+
+.reports-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.reports-title h2 {
+  margin: 0;
+  color: #2c3e50;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+[data-theme="dark"] .reports-title h2 {
+  color: #ecf0f1;
+}
+
+.reports-subtitle {
+  font-size: 0.85rem;
+  color: #7f8c8d;
+}
+
+.reports-actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.date-filter {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: white;
+  padding: 0.3rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+}
+
+[data-theme="dark"] .date-filter {
+  background: #2c3e50;
+  border-color: #34495e;
+  color: #ecf0f1;
+}
+
+.date-filter svg {
+  color: #7f8c8d;
+}
+
+.date-select {
+  border: none;
+  background: transparent;
+  padding: 0.4rem 0;
+  font-size: 0.9rem;
+  cursor: pointer;
+  color: #2c3e50;
+}
+
+[data-theme="dark"] .date-select {
+  color: #ecf0f1;
+}
+
+.date-select:focus {
+  outline: none;
+}
+
+/* Export Buttons */
+.export-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 1rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.export-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.export-btn.pdf {
+  background: #e74c3c;
+  color: white;
+}
+
+.export-btn.excel {
+  background: #27ae60;
+  color: white;
+}
+
+.export-btn.print {
+  background: #3498db;
+  color: white;
+}
+
+.export-btn.email {
+  background: #9b59b6;
+  color: white;
+}
+
+/* ============================================
+   INSIGHTS BANNER
+   ============================================ */
+
+.insights-banner {
+  background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+  border-radius: 12px;
+  padding: 0.8rem 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  border: 1px solid #ecf0f1;
+}
+
+[data-theme="dark"] .insights-banner {
+  background: #2c3e50;
+  border-color: #34495e;
+}
+
+.insights-icon {
+  font-size: 1.3rem;
+  color: #f39c12;
+}
+
+.insights-list {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.insight-tag {
+  font-size: 0.85rem;
+  padding: 0.2rem 0.8rem;
+  border-radius: 20px;
+  background: white;
+  border: 1px solid #ecf0f1;
+}
+
+[data-theme="dark"] .insight-tag {
+  background: #34495e;
+  border-color: #46637a;
+  color: #ecf0f1;
+}
+
+.insight-tag.positive {
+  border-left: 3px solid #27ae60;
+}
+
+.insight-tag.warning {
+  border-left: 3px solid #f39c12;
+}
+
+.insight-tag.negative {
+  border-left: 3px solid #e74c3c;
+}
+
+/* ============================================
+   KPI CARDS
+   ============================================ */
+
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.kpi-card {
+  background: white;
+  padding: 1.2rem 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+}
+
+[data-theme="dark"] .kpi-card {
+  background: #2c3e50;
+}
+
+.kpi-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.kpi-label {
+  font-size: 0.75rem;
+  color: #7f8c8d;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.kpi-value {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #2c3e50;
+  margin: 0.3rem 0;
+}
+
+[data-theme="dark"] .kpi-value {
+  color: #ecf0f1;
+}
+
+.kpi-trend {
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.kpi-trend.up {
+  color: #27ae60;
+}
+
+.kpi-trend.down {
+  color: #e74c3c;
+}
+
+.kpi-progress {
+  width: 100%;
+  height: 6px;
+  background: #ecf0f1;
+  border-radius: 3px;
+  margin-top: 0.5rem;
+  overflow: hidden;
+}
+
+.kpi-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #2ecc71, #27ae60);
+  border-radius: 3px;
+  transition: width 1s ease;
+}
+
+.kpi-subtitle {
+  font-size: 0.8rem;
+  color: #7f8c8d;
+  margin-top: 0.3rem;
+}
+
+/* ============================================
+   CHARTS GRID
+   ============================================ */
+
+.charts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.2rem;
+}
+
+.chart-card {
+  background: white;
+  border-radius: 12px;
+  padding: 1.2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+[data-theme="dark"] .chart-card {
+  background: #2c3e50;
+}
+
+.chart-card:hover {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.chart-card.large {
+  grid-column: span 2;
+}
+
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.8rem;
+}
+
+.chart-header h3 {
+  margin: 0;
+  font-size: 1rem;
+  color: #2c3e50;
+}
+
+[data-theme="dark"] .chart-header h3 {
+  color: #ecf0f1;
+}
+
+.chart-period {
+  font-size: 0.75rem;
+  color: #7f8c8d;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 1200px) {
+  .kpi-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .charts-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .chart-card.large {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 768px) {
+  .reports-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .reports-actions {
+    flex-wrap: wrap;
+  }
+
+  .kpi-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .charts-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .chart-card.large {
+    grid-column: span 1;
+  }
+
+  .insights-list {
+    flex-direction: column;
+  }
+
+  .insight-tag {
+    font-size: 0.8rem;
+  }
+
+  .export-btn {
+    font-size: 0.75rem;
+    padding: 0.3rem 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .reports-dashboard {
+    padding: 0.75rem;
+  }
+
+  .kpi-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .kpi-value {
+    font-size: 1.4rem;
+  }
+
+  .reports-title h2 {
+    font-size: 1.2rem;
+  }
+
+  .reports-actions {
+    flex-direction: column;
+  }
+
+  .date-filter {
+    width: 100%;
+  }
+
+  .date-select {
+    flex: 1;
+  }
+
+  .export-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .chart-card {
+    padding: 0.85rem;
+  }
+
+  .chart-card .recharts-legend-wrapper {
+    font-size: 0.68rem;
+  }
+}
+
+/* ============================================
+   PRINT STYLES
+   ============================================ */
+
+@media print {
+  .reports-actions,
+  .date-filter {
+    display: none !important;
+  }
+
+  .chart-card {
+    break-inside: avoid;
+    box-shadow: none !important;
+    border: 1px solid #ddd;
+  }
+
+  .kpi-card {
+    box-shadow: none !important;
+    border: 1px solid #ddd;
+  }
+
+  .reports-dashboard {
+    background: white !important;
+    padding: 0.5rem !important;
+  }
+
+  .insights-banner {
+    border: 1px solid #ddd;
+    background: #f8f9fa !important;
+  }
+
+  .kpi-card:hover,
+  .chart-card:hover {
+    transform: none !important;
+  }
+}
+/* Add these styles for the radial chart */
+
+.radial-chart-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.radial-chart-label {
+  text-align: center;
+  font-size: 0.85rem;
+  color: #7f8c8d;
+  margin-top: -10px;
+  font-weight: 500;
+}
+
+[data-theme="dark"] .radial-chart-label {
+  color: #95a5a6;
+}
+
+/* Dark mode support for radial chart */
+[data-theme="dark"] .radial-chart-wrapper text {
+  fill: #ecf0f1 !important;
+}
+
+[data-theme="dark"] .radial-chart-wrapper .recharts-radial-bar-background {
+  fill: #34495e !important;
+}

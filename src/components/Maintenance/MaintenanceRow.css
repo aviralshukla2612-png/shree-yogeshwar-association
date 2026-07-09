@@ -1,0 +1,103 @@
+.maintenance-row {
+  transition: background 0.3s;
+}
+
+.maintenance-row:hover {
+  background: #f8f9fa;
+}
+
+.maintenance-row.editing {
+  background: #fff3cd;
+}
+
+.flat-badge {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  background: #e8f5e9;
+  color: #2e7d32;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.amount-cell {
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.due-date {
+  position: relative;
+}
+
+.due-date.overdue {
+  color: #e74c3c;
+  font-weight: 600;
+}
+
+.overdue-badge {
+  display: inline-block;
+  margin-left: 0.5rem;
+  padding: 0.1rem 0.5rem;
+  background: #e74c3c;
+  color: white;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+.action-buttons {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.action-btn {
+  padding: 0.3rem 0.6rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.3s;
+}
+
+.action-btn.edit {
+  background: #3498db;
+  color: white;
+}
+
+.action-btn.edit:hover {
+  background: #2980b9;
+}
+
+.action-btn.delete {
+  background: #e74c3c;
+  color: white;
+}
+
+.action-btn.delete:hover {
+  background: #c0392b;
+}
+
+.action-btn.save {
+  background: #27ae60;
+  color: white;
+}
+
+.action-btn.save:hover {
+  background: #219a52;
+}
+
+.action-btn.cancel {
+  background: #95a5a6;
+  color: white;
+}
+
+.action-btn.cancel:hover {
+  background: #7f8c8d;
+}

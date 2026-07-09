@@ -1,0 +1,152 @@
+/* ResidentTable.css */
+
+.resident-table-container {
+  width: 100%;
+}
+
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.table-header h2 {
+  margin: 0;
+  font-size: 2rem;
+  color: #2c3e50;
+  font-weight: 700;
+}
+
+.table-wrapper {
+  background: #fff;
+  border-radius: 16px;
+  overflow-x: auto;
+  box-shadow: 0 4px 20px rgba(0,0,0,.08);
+}
+
+.resident-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.resident-table thead {
+  background: #f8f9fb;
+}
+
+.resident-table th {
+  padding: 18px;
+  text-align: left;
+  font-size: .95rem;
+  font-weight: 600;
+  color: #2c3e50;
+  border-bottom: 2px solid #ececec;
+}
+
+.resident-table td {
+  padding: 18px;
+  border-bottom: 1px solid #f1f1f1;
+  color: #34495e;
+}
+
+.resident-table tbody tr:hover {
+  background: #f9fbfc;
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 14px;
+  border-radius: 999px;
+  color: white;
+  font-size: .8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.status-badge.paid {
+  background: #27ae60;
+}
+
+.status-badge.pending {
+  background: #f39c12;
+}
+
+.status-badge.overdue {
+  background: #e74c3c;
+}
+
+/* Mobile */
+
+.mobile-view {
+  display: none;
+}
+
+.desktop-view {
+  display: block;
+}
+
+@media (max-width:768px) {
+
+.table-header{
+    flex-direction:column;
+    align-items:stretch;
+}
+
+.table-header h2{
+    font-size:1.5rem;
+}
+
+.desktop-view{
+    display:none;
+}
+
+.mobile-view{
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+}
+
+.resident-table-container .table-wrapper{
+    display:none;
+}
+
+}
+
+/* ============================================
+   DARK MODE (data-theme toggle)
+   ============================================ */
+
+[data-theme="dark"] .resident-table-container {
+  background: #1a2a3a;
+}
+
+[data-theme="dark"] .table-header h2 {
+  color: #ecf0f1;
+}
+
+[data-theme="dark"] .table-wrapper {
+  background: #2c3e50;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+[data-theme="dark"] .resident-table thead {
+  background: #34495e;
+}
+
+[data-theme="dark"] .resident-table th {
+  color: #ecf0f1;
+  border-bottom-color: #46637a;
+}
+
+[data-theme="dark"] .resident-table td {
+  color: #ecf0f1;
+  border-bottom-color: #34495e;
+}
+
+[data-theme="dark"] .resident-table tbody tr:hover {
+  background: #34495e;
+}
