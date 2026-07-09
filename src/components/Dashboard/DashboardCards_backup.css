@@ -1,4 +1,4 @@
-/* DashboardCards.css - Premium Color Scheme */
+﻿/* DashboardCards.css - Premium Color Scheme */
 
 .dashboard-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(clamp(130px, 15vw, 180px), 1fr)); gap: clamp(0.5rem, 1.5vw, 1rem); margin-bottom: clamp(1rem, 2vw, 2rem); width: 100%; }
 
@@ -148,67 +148,103 @@
 
 /* Responsive */
 @media (min-width: 1280px) {
-  .dashboard-cards { grid-template-columns: repeat(auto-fit, minmax(clamp(130px, 15vw, 180px), 1fr)); gap: clamp(0.5rem, 1.5vw, 1rem); }
-  .card { gap: 0.7rem; }
-  .card-icon { width: 46px; height: 46px; }
+  .dashboard-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(clamp(130px, 15vw, 180px), 1fr)); gap: clamp(0.5rem, 1.5vw, 1rem); margin-bottom: clamp(1rem, 2vw, 2rem); width: 100%; }
+
+  .card {
+    gap: 0.7rem;
+  }
+
+  .card-icon {
+    width: 46px;
+    height: 46px;
+  }
 }
 
 @media (max-width: 1200px) {
-  .dashboard-cards { grid-template-columns: repeat(auto-fit, minmax(clamp(130px, 15vw, 180px), 1fr)); }
+  .dashboard-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(clamp(130px, 15vw, 180px), 1fr)); gap: clamp(0.5rem, 1.5vw, 1rem); margin-bottom: clamp(1rem, 2vw, 2rem); width: 100%; }
 }
 
 @media (max-width: 768px) {
-  .dashboard-cards { grid-template-columns: repeat(auto-fit, minmax(clamp(130px, 15vw, 180px), 1fr)); }
-  .card { padding: 1rem; min-height: 90px; border-radius: 10px; }
-  .card-icon { width: 40px; height: 40px; }
-  .card-icon svg { font-size: 1.1rem; }
-  .card-value { font-size: clamp(0.95rem, 4vw, 1.15rem); }
-  .card-content h3 { font-size: 0.6rem; }
-}
+  .dashboard-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(clamp(130px, 15vw, 180px), 1fr)); gap: clamp(0.5rem, 1.5vw, 1rem); margin-bottom: clamp(1rem, 2vw, 2rem); width: 100%; }
 
-/* 3 columns x 2 rows on all small phones */
-@media (max-width: 600px) {
-  .dashboard-cards {
-    grid-template-columns: repeat(3, 1fr) !important;
-    gap: 0.4rem !important;
-  }
   .card {
-    padding: 0.65rem 0.5rem;
-    min-height: 80px;
-    border-radius: 8px;
-    align-items: flex-start;
-    flex-direction: column;
+    padding: 1rem;
+    min-height: 90px;
+    border-radius: 10px;
   }
-  .card-icon { width: 32px; height: 32px; margin-bottom: 0.2rem; }
-  .card-icon svg { font-size: 0.9rem; }
-  .card-value { font-size: clamp(0.85rem, 4vw, 1rem); }
-  .card-content h3 { font-size: 0.52rem; letter-spacing: 0.3px; }
-  .card-subtitle { font-size: 0.5rem; }
+
+  .card-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .card-icon svg {
+    font-size: 1.1rem;
+  }
+
+  .card-value {
+    font-size: clamp(0.95rem, 4vw, 1.15rem);
+  }
+
+  .card-content h3 {
+    font-size: 0.6rem;
+  }
 }
 
-@media (max-width: 360px) {
-  .dashboard-cards {
-    grid-template-columns: repeat(3, 1fr) !important;
-    gap: 0.35rem !important;
-  }
-  .card { padding: 0.5rem 0.4rem; min-height: 70px; }
-  .card-value { font-size: 0.8rem; }
-  .card-content h3 { font-size: 0.48rem; }
+@media (max-width: 480px) {`n  .dashboard-cards { grid-template-columns: repeat(3, 1fr) !important; gap: 0.4rem !important; }`n`n  .card {`n    padding: 0.65rem 0.5rem;`n    min-height: 80px;`n    border-radius: 8px;`n    align-items: flex-start;`n    flex-direction: column;`n  }`n`n  .card-icon {`n    width: 32px;`n    height: 32px;`n  }`n`n  .card-icon svg {`n    font-size: 0.9rem;`n  }`n`n  .card-value {`n    font-size: clamp(0.85rem, 4vw, 1rem);`n  }`n`n  .card-content h3 {`n    font-size: 0.52rem;`n    letter-spacing: 0.3px;`n  }`n`n  .card-subtitle {`n    font-size: 0.5rem;`n  }`n}
 }
 
 /* Dark Mode Support */
 @media (prefers-color-scheme: dark) {
-  .card { background: #2c3e50; border-color: rgba(255, 255, 255, 0.05); }
-  .card-content h3 { color: #95a5a6; }
-  .card-value { color: #ecf0f1; }
-  .card-subtitle { color: #7f8c8d; }
-  .skeleton-icon, .skeleton-text { background: #34495e; }
-  .card:last-child { background: #3d1a1a; border-bottom: 4px solid #e74c3c; }
-  .card:last-child .card-value { color: #e74c3c; }
-  .card:last-child .card-icon { background: #3d1a1a !important; color: #e74c3c !important; }
-  .card:last-child.positive { background: #1a3d1a; border-bottom: 4px solid #27ae60; }
-  .card:last-child.positive .card-value { color: #27ae60; }
-  .card:last-child.positive .card-icon { background: #1a3d1a !important; color: #27ae60 !important; }
+  .card {
+    background: #2c3e50;
+    border-color: rgba(255, 255, 255, 0.05);
+  }
+
+  .card-content h3 {
+    color: #95a5a6;
+  }
+
+  .card-value {
+    color: #ecf0f1;
+  }
+
+  .card-subtitle {
+    color: #7f8c8d;
+  }
+
+  .skeleton-icon,
+  .skeleton-text {
+    background: #34495e;
+  }
+
+  .card:last-child {
+    background: #3d1a1a;
+    border-bottom: 4px solid #e74c3c;
+  }
+
+  .card:last-child .card-value {
+    color: #e74c3c;
+  }
+
+  .card:last-child .card-icon {
+    background: #3d1a1a !important;
+    color: #e74c3c !important;
+  }
+
+  .card:last-child.positive {
+    background: #1a3d1a;
+    border-bottom: 4px solid #27ae60;
+  }
+
+  .card:last-child.positive .card-value {
+    color: #27ae60;
+  }
+
+  .card:last-child.positive .card-icon {
+    background: #1a3d1a !important;
+    color: #27ae60 !important;
+  }
 }
 
 /* Dark Mode - data-theme toggle */
@@ -222,3 +258,67 @@
 [data-theme="dark"] .card:last-child .card-value { color: #e74c3c; }
 [data-theme="dark"] .card:last-child.positive { background: #1a3d1a; border-bottom: 4px solid #27ae60; }
 [data-theme="dark"] .card:last-child.positive .card-value { color: #27ae60; }
+
+
+/* ============================================
+   DASHBOARD CARDS - 3 cols x 2 rows on mobile
+   ============================================ */
+
+@media (max-width: 600px) {
+  .dashboard-cards {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 0.5rem !important;
+  }
+
+  .card {
+    padding: 0.65rem 0.5rem;
+    min-height: 80px;
+    flex-direction: column;
+    align-items: flex-start;
+    border-radius: 10px;
+  }
+
+  .card-icon {
+    width: 32px;
+    height: 32px;
+    margin-bottom: 0.2rem;
+  }
+
+  .card-icon svg {
+    font-size: 0.9rem;
+  }
+
+  .card-value {
+    font-size: clamp(0.85rem, 4vw, 1rem);
+  }
+
+  .card-content h3 {
+    font-size: 0.55rem;
+    letter-spacing: 0.3px;
+  }
+
+  .card-subtitle {
+    font-size: 0.5rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .dashboard-cards {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 0.35rem !important;
+  }
+
+  .card {
+    padding: 0.5rem 0.4rem;
+    min-height: 70px;
+  }
+
+  .card-value {
+    font-size: 0.8rem;
+  }
+
+  .card-content h3 {
+    font-size: 0.48rem;
+  }
+}
+
