@@ -295,7 +295,7 @@ textarea {
   
   .status-badge {
     font-size: 0.7rem;
-    padding: 0.2rem 0.5rem;
+    padding: 0.3rem 0.75rem;
   }
   
   .btn {
@@ -474,7 +474,7 @@ textarea {
   .expense-table-container tbody td[data-label],
   .complaint-table-container tbody td[data-label],
   .table-container tbody td[data-label] {
-    grid-template-columns: minmax(96px, 36%) minmax(0, 1fr);
+    grid-template-columns: minmax(80px, 32%) minmax(0, 1fr);
     gap: 0.65rem;
     min-height: 38px;
   }
@@ -598,7 +598,7 @@ textarea {
   .complaint-table-container tbody td[data-label],
   .table-container tbody td[data-label] {
     display: grid !important;
-    grid-template-columns: minmax(88px, 38%) minmax(0, 1fr);
+    grid-template-columns: minmax(72px, 32%) minmax(0, 1fr);
     align-items: center;
     gap: 0.75rem;
     width: 100% !important;
@@ -683,7 +683,7 @@ textarea {
   .complaint-id {
     justify-self: end;
     max-width: 100%;
-    white-space: normal;
+    white-space: nowrap;
   }
 
   .resident-info,
@@ -805,7 +805,7 @@ textarea {
   .complaint-table-container tbody td[data-label]::before,
   .table-container tbody td[data-label]::before {
     flex: 0 0 auto;
-    max-width: 44%;
+    max-width: 38%;
     margin: 0 !important;
     text-align: left !important;
   }
@@ -828,7 +828,16 @@ textarea {
   .payment-method,
   .payment-mode-badge,
   .priority-badge-compact,
-  .complaint-id,
+  .complaint-id {
+    display: inline-flex !important;
+    justify-content: flex-end !important;
+    justify-self: auto !important;
+    margin-left: auto !important;
+    max-width: 68%;
+    text-align: right !important;
+    white-space: nowrap !important;
+  }
+
   .resident-info,
   .issue-info,
   .assigned-info,
@@ -839,7 +848,7 @@ textarea {
     justify-content: flex-end !important;
     justify-self: auto !important;
     margin-left: auto !important;
-    max-width: 56%;
+    max-width: 62%;
     text-align: right !important;
     white-space: normal !important;
   }
@@ -1245,7 +1254,7 @@ textarea {
     align-items: center !important;
     justify-content: center !important;
     gap: 0.25rem !important;
-    padding: 0.15rem 0.55rem !important;
+    padding: 0.3rem 0.8rem !important;
     border-radius: 999px !important;
     color: white !important;
     font-size: 0.65rem !important;
@@ -1269,8 +1278,9 @@ textarea {
     align-items: center !important;
     justify-content: center !important;
     gap: 0.25rem !important;
-    padding: 0.15rem 0.55rem !important;
+    padding: 0.3rem 0.8rem !important;
     border-radius: 999px !important;
+    background: #2980b9 !important;
     color: white !important;
     font-size: 0.65rem !important;
     font-weight: 700 !important;
@@ -1293,7 +1303,7 @@ textarea {
     align-items: center !important;
     justify-content: center !important;
     gap: 0.25rem !important;
-    padding: 0.15rem 0.55rem !important;
+    padding: 0.3rem 0.8rem !important;
     border-radius: 999px !important;
     font-size: 0.65rem !important;
     font-weight: 700 !important;
@@ -1481,7 +1491,7 @@ textarea {
     justify-content: center !important;
     width: fit-content !important;
     max-width: 100% !important;
-    white-space: normal !important;
+    white-space: nowrap !important;
   }
 
   .recent-description {

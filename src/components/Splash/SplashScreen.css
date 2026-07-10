@@ -1,4 +1,8 @@
-/* SplashScreen.css - Gold Theme with 360° Rotating Dotted Circle */
+/* SplashScreen.css - Ultra Premium Gold Theme with 360° Rotating Dotted Circle */
+
+/* ============================================
+   BACKGROUND & CONTAINER
+   ============================================ */
 
 .splash-container {
   position: fixed;
@@ -6,13 +10,59 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: #0a0a0a;
+  background: #060608;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 9999;
-  animation: splashFadeIn 0.6s ease;
+  animation: splashFadeIn 0.8s cubic-bezier(0.22, 1, 0.36, 1);
   overflow: hidden;
+}
+
+/* Ambient glow behind content */
+.splash-container::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 600px;
+  height: 600px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(
+    ellipse at center,
+    rgba(212, 175, 55, 0.06) 0%,
+    rgba(212, 175, 55, 0.02) 40%,
+    transparent 70%
+  );
+  border-radius: 50%;
+  pointer-events: none;
+  animation: ambientPulse 6s ease-in-out infinite;
+}
+
+/* Subtle floating particle dots */
+.splash-container::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(1px 1px at 15% 25%, rgba(212, 175, 55, 0.15) 0%, transparent 100%),
+    radial-gradient(1px 1px at 85% 18%, rgba(245, 215, 110, 0.12) 0%, transparent 100%),
+    radial-gradient(1px 1px at 42% 72%, rgba(212, 175, 55, 0.1) 0%, transparent 100%),
+    radial-gradient(1px 1px at 70% 85%, rgba(245, 215, 110, 0.08) 0%, transparent 100%),
+    radial-gradient(1px 1px at 28% 55%, rgba(212, 175, 55, 0.06) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 55% 35%, rgba(245, 215, 110, 0.1) 0%, transparent 100%);
+  animation: particleDrift 20s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes ambientPulse {
+  0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+  50% { opacity: 1; transform: translate(-50%, -50%) scale(1.08); }
+}
+
+@keyframes particleDrift {
+  from { transform: translateY(0); }
+  to { transform: translateY(-30px); }
 }
 
 .splash-content {
@@ -24,6 +74,8 @@
   max-width: 600px;
   width: 90%;
   text-align: center;
+  position: relative;
+  z-index: 1;
 }
 
 /* ============================================
@@ -31,13 +83,13 @@
    ============================================ */
 
 .splash-logo-wrapper {
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
   position: relative;
 }
 
 .splash-logo-ring {
-  width: 130px;
-  height: 130px;
+  width: 140px;
+  height: 140px;
   position: relative;
   display: flex;
   align-items: center;
@@ -51,6 +103,7 @@
   left: 0;
   width: 100%;
   height: 100%;
+  filter: drop-shadow(0 0 6px rgba(212, 175, 55, 0.15));
 }
 
 /* ✅ MAIN DOTTED CIRCLE - ROTATES 360° CONTINUOUSLY (TYRE EFFECT) */
@@ -73,29 +126,21 @@
 
 /* Tyre Rotation - Clockwise 360° */
 @keyframes rotateTyre {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 /* Tyre Rotation - Counter-Clockwise 360° */
 @keyframes rotateTyreReverse {
-  from {
-    transform: rotate(360deg);
-  }
-  to {
-    transform: rotate(0deg);
-  }
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
 }
 
 /* Building Logo */
 .splash-logo-icon {
-  width: 60px;
-  height: 60px;
-  background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+  width: 64px;
+  height: 64px;
+  background: linear-gradient(145deg, #111113, #1a1a1e);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -104,29 +149,48 @@
   color: #D4AF37;
   position: relative;
   z-index: 2;
-  box-shadow: 
-    0 0 40px rgba(212, 175, 55, 0.08),
-    inset 0 2px 4px rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(212, 175, 55, 0.1);
+  box-shadow:
+    0 0 60px rgba(212, 175, 55, 0.08),
+    0 0 30px rgba(212, 175, 55, 0.04),
+    inset 0 1px 2px rgba(255, 255, 255, 0.03),
+    inset 0 -1px 2px rgba(0, 0, 0, 0.3);
+  border: 1.5px solid rgba(212, 175, 55, 0.15);
   animation: logoPulse 3s ease-in-out infinite;
+}
+
+.splash-logo-icon::before {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.06) 0%, transparent 70%);
+  pointer-events: none;
 }
 
 .splash-logo-icon::after {
   content: '';
   position: absolute;
-  inset: 4px;
+  inset: 3px;
   border-radius: 50%;
-  border: 1px solid rgba(212, 175, 55, 0.05);
+  border: 1px solid rgba(212, 175, 55, 0.06);
 }
 
 @keyframes logoPulse {
   0%, 100% {
     transform: scale(1);
-    box-shadow: 0 0 40px rgba(212, 175, 55, 0.08);
+    box-shadow:
+      0 0 60px rgba(212, 175, 55, 0.08),
+      0 0 30px rgba(212, 175, 55, 0.04),
+      inset 0 1px 2px rgba(255, 255, 255, 0.03),
+      inset 0 -1px 2px rgba(0, 0, 0, 0.3);
   }
   50% {
-    transform: scale(1.03);
-    box-shadow: 0 0 60px rgba(212, 175, 55, 0.15);
+    transform: scale(1.04);
+    box-shadow:
+      0 0 80px rgba(212, 175, 55, 0.14),
+      0 0 40px rgba(212, 175, 55, 0.07),
+      inset 0 1px 2px rgba(255, 255, 255, 0.03),
+      inset 0 -1px 2px rgba(0, 0, 0, 0.3);
   }
 }
 
@@ -135,23 +199,44 @@
    ============================================ */
 
 .splash-title-wrapper {
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
   min-height: 4.5rem;
 }
 
 .splash-title {
-  font-size: 2.2rem;
-  font-weight: 700;
-  color: #ffffff;
-  margin: 0 0 0.3rem 0;
-  letter-spacing: 2px;
+  font-size: 2rem;
+  font-weight: 600;
+  color: transparent;
+  margin: 0 0 0.5rem 0;
+  letter-spacing: 3px;
   min-height: 3.2rem;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.1rem;
   flex-wrap: wrap;
-  animation: fadeInUp 0.6s ease;
+  animation: fadeInUp 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  background: linear-gradient(
+    135deg,
+    #C9A832 0%,
+    #D4AF37 20%,
+    #F5D76E 40%,
+    #E8C84A 60%,
+    #D4AF37 80%,
+    #C9A832 100%
+  );
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: fadeInUp 0.8s cubic-bezier(0.22, 1, 0.36, 1), titleShimmer 6s ease-in-out infinite;
+  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+@keyframes titleShimmer {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .splash-title .gold-text {
@@ -172,26 +257,23 @@
   display: inline-block;
   font-weight: 300;
   color: #D4AF37;
-  font-size: 2.2rem;
-  animation: cursorBlink 0.6s step-end infinite;
+  font-size: 2rem;
   -webkit-text-fill-color: #D4AF37;
+  text-shadow: 0 0 12px rgba(212, 175, 55, 0.4);
 }
 
 .splash-cursor.visible { opacity: 1; }
 .splash-cursor.hidden { opacity: 0; }
 
-@keyframes cursorBlink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
-
 .splash-subtitle {
-  font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.15);
+  font-size: 0.72rem;
+  color: rgba(212, 175, 55, 0.25);
   margin: 0;
-  letter-spacing: 3px;
-  font-weight: 300;
-  animation: fadeInUp 0.8s ease;
+  letter-spacing: 5px;
+  font-weight: 400;
+  text-transform: uppercase;
+  animation: fadeInUp 1s cubic-bezier(0.22, 1, 0.36, 1);
+  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
 }
 
 /* ============================================
@@ -203,17 +285,18 @@
 }
 
 .splash-loading-text {
-  font-size: 0.75rem;
-  color: rgba(212, 175, 55, 0.4);
-  letter-spacing: 4px;
-  font-weight: 300;
+  font-size: 0.65rem;
+  color: rgba(212, 175, 55, 0.3);
+  letter-spacing: 6px;
+  font-weight: 400;
   text-transform: uppercase;
-  animation: textPulse 1.5s ease-in-out infinite;
+  animation: textPulse 2s ease-in-out infinite;
+  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
 }
 
 @keyframes textPulse {
-  0%, 100% { opacity: 0.3; }
-  50% { opacity: 0.7; }
+  0%, 100% { opacity: 0.25; }
+  50% { opacity: 0.6; }
 }
 
 /* ============================================
@@ -221,14 +304,14 @@
    ============================================ */
 
 .splash-progress-wrapper {
-  width: 50%;
-  max-width: 280px;
+  width: 45%;
+  max-width: 240px;
 }
 
 .splash-progress-bar {
   width: 100%;
-  height: 2px;
-  background: rgba(255, 255, 255, 0.04);
+  height: 1.5px;
+  background: rgba(212, 175, 55, 0.06);
   border-radius: 2px;
   overflow: hidden;
   position: relative;
@@ -236,14 +319,22 @@
 
 .splash-progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, #D4AF37, #F5D76E, #C9A832);
-  background-size: 200% 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(212, 175, 55, 0.3),
+    #D4AF37,
+    #F5D76E,
+    #D4AF37,
+    rgba(212, 175, 55, 0.3)
+  );
+  background-size: 300% 100%;
   border-radius: 2px;
   transition: width 0.3s ease;
-  animation: shimmer 2s linear infinite;
+  animation: progressShimmer 2.5s linear infinite;
+  box-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
 }
 
-@keyframes shimmer {
+@keyframes progressShimmer {
   0% { background-position: 200% 0; }
   100% { background-position: -200% 0; }
 }
@@ -251,12 +342,12 @@
 .splash-progress-fill::after {
   content: '';
   position: absolute;
-  top: -2px;
+  top: -3px;
   right: 0;
-  width: 15px;
-  height: 6px;
-  background: rgba(245, 215, 110, 0.15);
-  filter: blur(4px);
+  width: 20px;
+  height: 8px;
+  background: rgba(245, 215, 110, 0.2);
+  filter: blur(6px);
   border-radius: 50%;
 }
 
@@ -267,7 +358,7 @@
 @keyframes splashFadeIn {
   from {
     opacity: 0;
-    transform: scale(1.02);
+    transform: scale(1.03);
   }
   to {
     opacity: 1;
@@ -278,7 +369,7 @@
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(24px);
   }
   to {
     opacity: 1;
@@ -293,55 +384,56 @@
 /* Tablet */
 @media (max-width: 992px) {
   .splash-logo-ring {
-    width: 120px;
-    height: 120px;
+    width: 125px;
+    height: 125px;
   }
 
   .splash-logo-icon {
-    width: 55px;
-    height: 55px;
+    width: 58px;
+    height: 58px;
     font-size: 2rem;
   }
 
   .splash-title {
-    font-size: 2rem;
+    font-size: 1.8rem;
     min-height: 3rem;
+    letter-spacing: 2.5px;
   }
 
   .splash-cursor {
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
 }
 
 @media (max-width: 768px) {
   .splash-logo-ring {
-    width: 110px;
-    height: 110px;
+    width: 115px;
+    height: 115px;
   }
 
   .splash-logo-icon {
-    width: 50px;
-    height: 50px;
+    width: 52px;
+    height: 52px;
     font-size: 1.8rem;
   }
 
   .splash-title {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     min-height: 2.6rem;
-    letter-spacing: 1px;
-  }
-
-  .splash-cursor {
-    font-size: 1.6rem;
-  }
-
-  .splash-subtitle {
-    font-size: 0.7rem;
     letter-spacing: 2px;
   }
 
+  .splash-cursor {
+    font-size: 1.5rem;
+  }
+
+  .splash-subtitle {
+    font-size: 0.65rem;
+    letter-spacing: 3px;
+  }
+
   .splash-progress-wrapper {
-    width: 60%;
+    width: 55%;
   }
 
   .splash-title-wrapper {
@@ -355,57 +447,62 @@
     padding: 1.5rem;
   }
 
+  .splash-logo-wrapper {
+    margin-bottom: 2rem;
+  }
+
   .splash-logo-ring {
-    width: 90px;
-    height: 90px;
+    width: 100px;
+    height: 100px;
   }
 
   .splash-logo-icon {
-    width: 42px;
-    height: 42px;
+    width: 46px;
+    height: 46px;
     font-size: 1.5rem;
   }
 
   .splash-dotted-circle {
-    width: 90px;
-    height: 90px;
+    width: 100px;
+    height: 100px;
   }
 
   .splash-title {
-    font-size: 1.2rem;
+    font-size: 1.15rem;
     min-height: 2rem;
-    letter-spacing: 0.5px;
+    letter-spacing: 1.5px;
   }
 
   .splash-cursor {
-    font-size: 1.2rem;
+    font-size: 1.15rem;
   }
 
   .splash-subtitle {
     font-size: 0.55rem;
-    letter-spacing: 1.5px;
+    letter-spacing: 2px;
   }
 
   .splash-loading-text {
-    font-size: 0.6rem;
-    letter-spacing: 3px;
+    font-size: 0.55rem;
+    letter-spacing: 4px;
   }
 
   .splash-progress-wrapper {
-    width: 70%;
-  }
-
-  .splash-logo-wrapper {
-    margin-bottom: 1.5rem;
+    width: 65%;
   }
 
   .splash-title-wrapper {
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
     min-height: 2.8rem;
   }
 
   .splash-loading-wrapper {
     margin-bottom: 1rem;
+  }
+
+  .splash-container::before {
+    width: 350px;
+    height: 350px;
   }
 }
 
@@ -416,97 +513,104 @@
   }
 
   .splash-logo-ring {
-    width: 75px;
-    height: 75px;
+    width: 85px;
+    height: 85px;
   }
 
   .splash-logo-icon {
-    width: 35px;
-    height: 35px;
-    font-size: 1.2rem;
+    width: 40px;
+    height: 40px;
+    font-size: 1.3rem;
   }
 
   .splash-dotted-circle {
-    width: 75px;
-    height: 75px;
+    width: 85px;
+    height: 85px;
   }
 
   .splash-title {
-    font-size: 1rem;
+    font-size: 0.95rem;
     min-height: 1.6rem;
-  }
-
-  .splash-cursor {
-    font-size: 1rem;
-  }
-
-  .splash-subtitle {
-    font-size: 0.45rem;
     letter-spacing: 1px;
   }
 
+  .splash-cursor {
+    font-size: 0.95rem;
+  }
+
+  .splash-subtitle {
+    font-size: 0.48rem;
+    letter-spacing: 1.5px;
+  }
+
   .splash-loading-text {
-    font-size: 0.5rem;
-    letter-spacing: 2px;
+    font-size: 0.48rem;
+    letter-spacing: 3px;
   }
 
   .splash-progress-wrapper {
-    width: 80%;
+    width: 75%;
   }
 
   .splash-logo-wrapper {
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
   }
 
   .splash-title-wrapper {
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
     min-height: 2.2rem;
   }
 
   .splash-loading-wrapper {
     margin-bottom: 0.8rem;
   }
+
+  .splash-container::before {
+    width: 280px;
+    height: 280px;
+  }
 }
 
 /* Extra Small */
 @media (max-width: 320px) {
   .splash-logo-ring {
-    width: 65px;
-    height: 65px;
+    width: 72px;
+    height: 72px;
   }
 
   .splash-logo-icon {
-    width: 30px;
-    height: 30px;
-    font-size: 1rem;
+    width: 34px;
+    height: 34px;
+    font-size: 1.1rem;
   }
 
   .splash-dotted-circle {
-    width: 65px;
-    height: 65px;
+    width: 72px;
+    height: 72px;
   }
 
   .splash-title {
-    font-size: 0.85rem;
+    font-size: 0.82rem;
     min-height: 1.4rem;
+    letter-spacing: 0.5px;
   }
 
   .splash-cursor {
-    font-size: 0.85rem;
+    font-size: 0.82rem;
   }
 
   .splash-subtitle {
     font-size: 0.4rem;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
   }
 
   .splash-loading-text {
-    font-size: 0.45rem;
-    letter-spacing: 1.5px;
+    font-size: 0.42rem;
+    letter-spacing: 2px;
   }
 
   .splash-progress-wrapper {
-    width: 85%;
+    width: 80%;
   }
 }
 
@@ -571,6 +675,11 @@
     width: 100%;
     max-width: 200px;
   }
+
+  .splash-container::before {
+    width: 300px;
+    height: 300px;
+  }
 }
 
 /* ============================================
@@ -606,5 +715,14 @@
 
   .splash-container {
     animation: none;
+  }
+
+  .splash-container::before,
+  .splash-container::after {
+    animation: none;
+  }
+
+  .splash-title {
+    animation: fadeInUp 0.8s ease;
   }
 }
