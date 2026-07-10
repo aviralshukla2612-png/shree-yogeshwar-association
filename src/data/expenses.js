@@ -16,7 +16,7 @@ export const expensesData = [
   { 
     id: 3, 
     category: 'Staff Salary', 
-    amount: 75000, 
+    amount: 83000, 
     date: '2026-06-10', 
     description: 'Monthly salaries' 
   },

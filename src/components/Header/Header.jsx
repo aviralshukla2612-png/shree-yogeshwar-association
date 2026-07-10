@@ -24,7 +24,7 @@ import {
 } from 'react-icons/fa';
 import './Header.css';
 
-const Header = ({ activeTab, onNavigate, isDark, onToggleDark }) => {
+const Header = ({ activeTab, onNavigate, isDark, onToggleDark, showDialog }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(() => window.innerWidth <= 992);
@@ -201,7 +201,7 @@ const Header = ({ activeTab, onNavigate, isDark, onToggleDark }) => {
                     <FaCog /> Settings
                   </button>
                   <div className="dropdown-divider" />
-                  <button className="dropdown-item logout" onClick={() => alert('Logout clicked')}>
+                  <button className="dropdown-item logout" onClick={() => showDialog('Logout functionality coming soon!', 'alert', 'Logout')}>
                     <FaSignOutAlt /> Logout
                   </button>
                 </div>
@@ -302,7 +302,7 @@ const Header = ({ activeTab, onNavigate, isDark, onToggleDark }) => {
             <span>My Profile</span>
           </button>
 
-          <button className="mobile-menu-item logout" onClick={() => alert('Logout clicked')}>
+          <button className="mobile-menu-item logout" onClick={() => showDialog('Logout functionality coming soon!', 'alert', 'Logout')}>
             <FaSignOutAlt />
             <span>Logout</span>
           </button>

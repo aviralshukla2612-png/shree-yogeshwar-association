@@ -25,7 +25,7 @@ import {
 import AddStaffModal from './AddStaffModal';
 import './StaffTable.css';
 
-const StaffTable = ({ data, onAdd, onUpdate, onDelete, loading: _loading }) => {
+const StaffTable = ({ data, onAdd, onUpdate, onDelete, loading: _loading, showDialog }) => {
   const [showModal, setShowModal] = useState(false);
   const [editingId, setEditingId] = useState(null);
   const [editData, setEditData] = useState({});
@@ -91,7 +91,7 @@ const StaffTable = ({ data, onAdd, onUpdate, onDelete, loading: _loading }) => {
 
   const saveEdit = () => {
     if (editData.salary && parseFloat(editData.salary) <= 0) {
-      alert('Salary must be greater than 0.');
+      showDialog('Salary must be greater than 0.', 'alert', 'Validation Error');
       return;
     }
 
@@ -281,9 +281,10 @@ const StaffTable = ({ data, onAdd, onUpdate, onDelete, loading: _loading }) => {
       )}
 
       {showModal && (
-        <AddStaffModal 
+        <AddStaffModal
           onClose={() => setShowModal(false)}
           onAdd={onAdd}
+          showDialog={showDialog}
         />
       )}
     </div>

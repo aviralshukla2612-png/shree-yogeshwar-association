@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './ResidentCard.css';
 
-const ResidentCard = ({ resident }) => {
+const ResidentCard = ({ resident, showDialog }) => {
   const [showDetails, setShowDetails] = useState(false);
 
   const getStatusColor = (status) => {
@@ -32,7 +32,7 @@ const ResidentCard = ({ resident }) => {
         </div>
         <div className="resident-info">
           <span className="info-label">Status:</span>
-          <span 
+          <span
             className="resident-status"
             style={{ backgroundColor: getStatusColor(resident.maintenanceStatus) }}
           >
@@ -42,7 +42,7 @@ const ResidentCard = ({ resident }) => {
       </div>
       <div className="resident-card-footer">
         <button className="resident-action-btn" onClick={() => setShowDetails(true)}>View Details</button>
-        <button className="resident-action-btn secondary" onClick={() => alert(`Reminder sent to ${resident.name}`)}>Send Reminder</button>
+        <button className="resident-action-btn secondary" onClick={() => showDialog(`Reminder sent to ${resident.name}`, 'alert', 'Reminder Sent')}>Send Reminder</button>
       </div>
     </div>
 
@@ -88,7 +88,7 @@ const ResidentCard = ({ resident }) => {
             <button className="resident-action-btn secondary" onClick={() => setShowDetails(false)}>
               Close
             </button>
-            <button className="resident-action-btn" onClick={() => alert(`Reminder sent to ${resident.name}`)}>
+            <button className="resident-action-btn" onClick={() => showDialog(`Reminder sent to ${resident.name}`, 'alert', 'Reminder Sent')}>
               Send Reminder
             </button>
           </div>

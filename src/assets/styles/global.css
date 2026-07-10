@@ -1110,26 +1110,18 @@ body {
   animation: slideInRight 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.toast-success {
-  background: linear-gradient(135deg, #27ae60, #219a52);
-}
-
-.toast-error {
-  background: linear-gradient(135deg, #e74c3c, #c0392b);
-}
-
-.toast-warning {
-  background: linear-gradient(135deg, #f39c12, #e67e22);
-}
-
+.toast-success,
+.toast-error,
+.toast-warning,
 .toast-info {
-  background: linear-gradient(135deg, #3498db, #2980b9);
+  background: #ffffff;
+  color: #2c3e50;
 }
 
 .toast-close {
   background: none;
   border: none;
-  color: white;
+  color: #95a5a6;
   font-size: 1.5rem;
   cursor: pointer;
   opacity: 0.8;
@@ -1139,6 +1131,7 @@ body {
 
 .toast-close:hover {
   opacity: 1;
+  color: #2c3e50;
 }
 
 @keyframes slideInRight {
@@ -1372,15 +1365,11 @@ body {
 [data-theme="dark"] .pagination-page.active { background: #27ae60; border-color: #27ae60; }
 
 /* Dashboard Cards */
-[data-theme="dark"] .card { background: #2c3e50; border-color: rgba(255,255,255,0.05); }
+[data-theme="dark"] .card { background: #2c3e50 !important; border-color: rgba(255,255,255,0.05); }
 [data-theme="dark"] .card-content h3 { color: #95a5a6; }
-[data-theme="dark"] .card-value { color: #ecf0f1; }
+[data-theme="dark"] .card-value { color: #ecf0f1 !important; }
 [data-theme="dark"] .card-subtitle { color: #7f8c8d; }
-[data-theme="dark"] .card:hover { background: #34495e; }
-[data-theme="dark"] .card:last-child { background: #3d1a1a; border-bottom: 4px solid #e74c3c; }
-[data-theme="dark"] .card:last-child .card-value { color: #e74c3c; }
-[data-theme="dark"] .card:last-child.positive { background: #1a3d1a; border-bottom: 4px solid #27ae60; }
-[data-theme="dark"] .card:last-child.positive .card-value { color: #27ae60; }
+[data-theme="dark"] .card:hover { background: #34495e !important; }
 
 /* Maintenance table */
 [data-theme="dark"] .maintenance-table-container { background: #2c3e50; }
@@ -2169,4 +2158,247 @@ body {
 [data-theme="dark"] .mobile-card-grid .assigned-info svg,
 [data-theme="dark"] .mobile-card-grid .date-info svg {
   color: #27ae60 !important;
+}
+
+/* ============================================
+   GLOBAL MOBILE - FORCE ALL TD LEFT ALIGNED
+   ============================================ */
+
+@media (max-width: 768px) {
+  tbody td {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
+    text-align: left !important;
+    padding: 0 !important;
+  }
+
+  tbody td::before {
+    text-align: left !important;
+  }
+
+  tbody td[data-label="Actions"] {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    grid-column: 1 / -1;
+  }
+
+  tbody td[data-label="Actions"] .action-buttons {
+    justify-content: flex-start !important;
+    justify-self: start !important;
+  }
+
+  .recent-maintenance-table td,
+  .recent-expenses-table td {
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    text-align: left !important;
+    gap: 0.4rem;
+    padding: 0.38rem 0 !important;
+    border-bottom: 1px solid #f0f3f6;
+  }
+
+  .recent-maintenance-table td::before,
+  .recent-expenses-table td::before {
+    flex-shrink: 0;
+    white-space: nowrap;
+    font-size: 0.65rem;
+    font-weight: 800;
+    color: #7f8c8d;
+    text-transform: uppercase;
+  }
+
+  .recent-maintenance-amount,
+  .recent-amount {
+    text-align: left !important;
+  }
+
+  .recent-status-badge,
+  .recent-category-badge,
+  .recent-payment-badge {
+    align-self: flex-start !important;
+    justify-content: flex-start !important;
+  }
+}
+
+
+/* ============================================
+   FORCE ALL LEFT ALIGNMENT - FINAL OVERRIDE
+   ============================================ */
+
+/* Dashboard grid - both panels left aligned */
+.dashboard-grid .grid-item,
+.dashboard-grid .grid-item *,
+.dashboard-grid > .grid-item:last-child,
+.dashboard-grid > .grid-item:last-child * {
+  text-align: left !important;
+}
+
+.dashboard-grid .grid-item .grid-header,
+.dashboard-grid > .grid-item:last-child .grid-header {
+  justify-content: flex-start !important;
+}
+
+.dashboard-grid > .grid-item:last-child .recent-category-badge,
+.dashboard-grid > .grid-item:last-child .recent-status-badge {
+  margin-left: 0 !important;
+}
+
+/* Recent tables - all cells left */
+.recent-expenses-table th,
+.recent-expenses-table td,
+.recent-maintenance-table th,
+.recent-maintenance-table td,
+.recent-amount,
+.recent-maintenance-amount {
+  text-align: left !important;
+}
+
+/* Mobile action buttons - left aligned */
+@media (max-width: 768px) {
+  .action-buttons {
+    justify-content: flex-start !important;
+    justify-self: start !important;
+  }
+
+  .mobile-card-head,
+  .expense-mobile-card .mobile-card-head,
+  .maintenance-mobile-card .mobile-card-head {
+    justify-content: flex-start !important;
+  }
+
+  .mobile-card-actions,
+  .expense-mobile-card .mobile-card-actions,
+  .maintenance-mobile-card .mobile-card-actions {
+    justify-content: flex-start !important;
+  }
+
+  .mobile-card-grid > div,
+  .expense-mobile-card .mobile-card-grid > div,
+  .maintenance-mobile-card .mobile-card-grid > div {
+    align-items: flex-start !important;
+    text-align: left !important;
+  }
+
+  .mobile-card-grid strong,
+  .mobile-card-grid span,
+  .mobile-card-grid .payment-method,
+  .mobile-card-grid .payment-mode-badge,
+  .mobile-card-grid .amount-value {
+    text-align: left !important;
+    align-self: flex-start !important;
+  }
+}
+
+/* ============================================
+   NUCLEAR LEFT ALIGNMENT OVERRIDE - FINAL
+   Beats all previous right-align !important rules
+   ============================================ */
+
+/* Dashboard grid - BOTH panels always left */
+.dashboard-grid .grid-item:last-child,
+.dashboard-grid > .grid-item:last-child {
+  text-align: left !important;
+}
+.dashboard-grid .grid-item:last-child *,
+.dashboard-grid > .grid-item:last-child * {
+  text-align: left !important;
+}
+.dashboard-grid .grid-item:last-child .grid-header,
+.dashboard-grid > .grid-item:last-child .grid-header {
+  justify-content: flex-start !important;
+}
+.dashboard-grid .grid-item:last-child .recent-category-badge,
+.dashboard-grid > .grid-item:last-child .recent-category-badge,
+.dashboard-grid .grid-item:last-child .recent-status-badge,
+.dashboard-grid > .grid-item:last-child .recent-status-badge {
+  margin-left: 0 !important;
+}
+.dashboard-grid .grid-item:first-child .recent-maintenance-amount-header,
+.dashboard-grid .grid-item:first-child .recent-maintenance-amount {
+  text-align: left !important;
+}
+
+/* All recent tables */
+.recent-expenses-table th,
+.recent-expenses-table td,
+.recent-maintenance-table th,
+.recent-maintenance-table td,
+.recent-amount,
+.recent-maintenance-amount,
+.recent-expenses-amount-header,
+.recent-maintenance-amount-header,
+.recent-description {
+  text-align: left !important;
+}
+
+/* Mobile action buttons */
+@media (max-width: 768px) {
+  .action-buttons {
+    justify-content: flex-start !important;
+    justify-self: start !important;
+  }
+  .mobile-card-head,
+  .complaint-mobile-card .mobile-card-head,
+  .expense-mobile-card .mobile-card-head,
+  .maintenance-mobile-card .mobile-card-head {
+    justify-content: flex-start !important;
+    gap: 0.5rem !important;
+  }
+  .mobile-card-actions,
+  .complaint-mobile-card .mobile-card-actions,
+  .expense-mobile-card .mobile-card-actions,
+  .maintenance-mobile-card .mobile-card-actions {
+    justify-content: flex-start !important;
+  }
+  .mobile-card-grid > div,
+  .complaint-mobile-card .mobile-card-grid > div,
+  .expense-mobile-card .mobile-card-grid > div,
+  .maintenance-mobile-card .mobile-card-grid > div {
+    align-items: flex-start !important;
+    text-align: left !important;
+  }
+  .mobile-card-grid strong,
+  .mobile-card-grid span,
+  .mobile-card-grid .payment-method,
+  .mobile-card-grid .payment-mode-badge,
+  .mobile-card-grid .amount-value,
+  .mobile-card-grid .category-badge,
+  .mobile-card-grid .status-badge,
+  .mobile-card-grid .priority-badge-compact,
+  .mobile-card-grid .assigned-info,
+  .mobile-card-grid .date-info {
+    text-align: left !important;
+    align-self: flex-start !important;
+    margin-left: 0 !important;
+  }
+}
+
+
+/* ============================================
+   ACTION BUTTONS - RIGHT SIDE ON MOBILE CARDS
+   ============================================ */
+
+@media (max-width: 768px) {
+  /* All mobile card action buttons go to the RIGHT */
+  .mobile-card-actions,
+  .expense-mobile-card .mobile-card-actions,
+  .maintenance-mobile-card .mobile-card-actions,
+  .complaint-mobile-card .mobile-card-actions {
+    justify-content: flex-end !important;
+    width: 100%;
+  }
+
+  /* Actions row in table cards (data-label="Actions") also right */
+  tbody td[data-label="Actions"] .action-buttons,
+  .maintenance-table-container tbody td[data-label="Actions"] .action-buttons,
+  .expense-table-container tbody td[data-label="Actions"] .action-buttons,
+  .complaint-table-container tbody td[data-label="Actions"] .action-buttons {
+    justify-content: flex-end !important;
+    justify-self: end !important;
+    width: 100%;
+  }
 }

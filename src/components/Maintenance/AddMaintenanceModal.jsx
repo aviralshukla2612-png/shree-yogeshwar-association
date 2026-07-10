@@ -3,7 +3,7 @@ import Modal from '../Common/Modal';
 import Button from '../Common/Button';
 import './AddMaintenanceModal.css';
 
-const AddMaintenanceModal = ({ onClose, onAdd }) => {
+const AddMaintenanceModal = ({ onClose, onAdd, showDialog }) => {
   const [formData, setFormData] = useState({
     name: '',
     flatNo: '',
@@ -25,13 +25,12 @@ const AddMaintenanceModal = ({ onClose, onAdd }) => {
     currentDate.setHours(0, 0, 0, 0); // Reset time to midnight
     
     if (selectedDate > currentDate) {
-      alert('Due date cannot be in the future. Please select today or a past date.');
+      showDialog('Due date cannot be in the future. Please select today or a past date.', 'alert', 'Invalid Date');
       return;
     }
 
-    // Validate amount
     if (parseFloat(formData.amount) <= 0) {
-      alert('Amount must be greater than 0.');
+      showDialog('Amount must be greater than 0.', 'alert', 'Invalid Amount');
       return;
     }
 

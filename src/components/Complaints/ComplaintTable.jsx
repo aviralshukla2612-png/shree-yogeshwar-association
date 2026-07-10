@@ -26,7 +26,7 @@ import {
 } from 'react-icons/fa';
 import './ComplaintTable.css';
 
-const ComplaintTable = ({ data, onUpdate, loading: _loading }) => {
+const ComplaintTable = ({ data, onUpdate, loading: _loading, showDialog }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [filterPriority, setFilterPriority] = useState('all');
   const [filterStatus, setFilterStatus] = useState('all');
@@ -233,20 +233,19 @@ const ComplaintTable = ({ data, onUpdate, loading: _loading }) => {
 
   // Handle edit
   const handleEdit = (complaint) => {
-    alert(`Edit complaint: ${generateComplaintId(complaint.id)}`);
+    showDialog(`Edit complaint: ${generateComplaintId(complaint.id)}`, 'alert', 'Edit Complaint');
   };
 
-  // Handle delete
-  const handleDelete = (id) => {
-    if (window.confirm('Are you sure you want to delete this complaint?')) {
-      alert(`Complaint ${generateComplaintId(id)} deleted`);
+  const handleDelete = async (id) => {
+    const ok = await showDialog('Are you sure you want to delete this complaint?', 'confirm', 'Delete Complaint');
+    if (ok) {
+      showDialog(`Complaint ${generateComplaintId(id)} deleted`, 'alert', 'Deleted');
     }
   };
 
-  // Handle add comment
   const handleAddComment = () => {
     if (newComment.trim()) {
-      alert(`Comment added: ${newComment}`);
+      showDialog(`Comment added: ${newComment}`, 'alert', 'Comment Added');
       setNewComment('');
     }
   };
@@ -463,67 +462,80 @@ const ComplaintTable = ({ data, onUpdate, loading: _loading }) => {
           filteredData.map((complaint) => (
             <div
               key={complaint.id}
-              className={`complaint-mobile-card priority-${complaint.priority.toLowerCase()}`}
+              className="kv-card"
               onClick={() => handleViewDetails(complaint)}
             >
-              <div className="mobile-card-head">
-                <span className="complaint-id">{generateComplaintId(complaint.id)}</span>
-                <span
-                  className="status-badge"
-                  style={{ backgroundColor: getStatusColor(complaint.status) }}
-                >
-                  {getStatusIcon(complaint.status)}
-                  {complaint.status}
+              <div className="kv-row">
+                <span className="kv-label">Complaint ID</span>
+                <span className="kv-value kv-bold">{generateComplaintId(complaint.id)}</span>
+              </div>
+              <div className="kv-row">
+                <span className="kv-label">Resident</span>
+                <span className="kv-value">
+                  <span className="resident-info" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem' }}>
+                    <span className="resident-avatar" style={{ width: '18px', height: '18px', fontSize: '0.6rem', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#3498db', color: 'white', borderRadius: '50%', fontWeight: 'bold' }}>
+                      {complaint.resident.charAt(0).toUpperCase()}
+                    </span>
+                    <span className="resident-name">{complaint.resident}</span>
+                  </span>
+                </span>
+              </div>
+              <div className="kv-row">
+                <span className="kv-label">Issue</span>
+                <span className="kv-value kv-bold">{complaint.issue}</span>
+              </div>
+              <div className="kv-row">
+                <span className="kv-label">Category</span>
+                <span className="kv-value">
+                  <span className="category-badge">
+                    {getCategoryIcon(getComplaintCategory(complaint.issue))} {getComplaintCategory(complaint.issue)}
+                  </span>
+                </span>
+              </div>
+              <div className="kv-row">
+                <span className="kv-label">Priority</span>
+                <span className="kv-value">
+                  <span className={`priority-badge-compact ${complaint.priority.toLowerCase()}`}>
+                    {getPriorityIcon(complaint.priority)} {complaint.priority}
+                  </span>
+                </span>
+              </div>
+              <div className="kv-row">
+                <span className="kv-label">Assigned To</span>
+                <span className="kv-value">
+                  <span className="assigned-info">
+                    <FaUserCheck /> {getAssignedStaff(complaint.priority).name}
+                  </span>
+                </span>
+              </div>
+              <div className="kv-row">
+                <span className="kv-label">Submitted</span>
+                <span className="kv-value">
+                  <span className="date-info">
+                    <FaCalendarAlt /> {formatDateTime('2026-07-08T10:45:00')}
+                  </span>
+                </span>
+              </div>
+              <div className="kv-row">
+                <span className="kv-label">Status</span>
+                <span className="kv-value">
+                  <span
+                    className={`status-badge ${complaint.status.toLowerCase()}`}
+                    style={{ backgroundColor: getStatusColor(complaint.status) }}
+                  >
+                    {getStatusIcon(complaint.status)} {complaint.status}
+                  </span>
                 </span>
               </div>
 
-              <div className="complaint-mobile-title">
-                <div className="resident-info">
-                  <span className="resident-avatar">
-                    {complaint.resident.charAt(0).toUpperCase()}
-                  </span>
-                  <span className="resident-name">{complaint.resident}</span>
-                </div>
-                <strong>{complaint.issue}</strong>
-              </div>
-
-              <div className="mobile-card-grid">
-                <div>
-                  <small>Category</small>
-                  <span className="category-badge">
-                    {getCategoryIcon(getComplaintCategory(complaint.issue))}
-                    {getComplaintCategory(complaint.issue)}
-                  </span>
-                </div>
-                <div>
-                  <small>Priority</small>
-                  <span className="priority-badge-compact">
-                    {getPriorityIcon(complaint.priority)} {complaint.priority}
-                  </span>
-                </div>
-                <div>
-                  <small>Assigned To</small>
-                  <span className="assigned-info">
-                    <FaUserCheck />
-                    {getAssignedStaff(complaint.priority).name}
-                  </span>
-                </div>
-                <div>
-                  <small>Submitted</small>
-                  <span className="date-info">
-                    <FaCalendarAlt />
-                    {formatDateTime('2026-07-08T10:45:00')}
-                  </span>
-                </div>
-              </div>
-
-              <div className="mobile-card-actions" onClick={(e) => e.stopPropagation()}>
+              <div className="kv-actions" onClick={(e) => e.stopPropagation()}>
                 <button
                   className="action-btn view"
                   onClick={() => handleViewDetails(complaint)}
                   title="View Details"
+                  style={{ background: '#ebf5fb', color: '#2980b9' }}
                 >
-                  <FaEye />
+                  <FaEye /> View
                 </button>
                 <button
                   className="action-btn edit"

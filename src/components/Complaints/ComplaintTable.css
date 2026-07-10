@@ -1574,3 +1574,33 @@
 [data-theme="dark"] .complaint-mobile-card .mobile-card-grid small {
   color: #7f8c8d !important;
 }
+
+/* ============================================
+   FORCE LEFT ALIGNMENT - ALL MOBILE
+   ============================================ */
+@media (max-width: 768px) {
+  .complaint-mobile-card .mobile-card-head {
+    justify-content: flex-start !important;
+    gap: 0.5rem !important;
+  }
+  .complaint-mobile-card .mobile-card-actions {
+    justify-content: flex-start !important;
+  }
+  .complaint-mobile-card .mobile-card-grid > div {
+    align-items: flex-start !important;
+    text-align: left !important;
+  }
+  .complaint-mobile-card .mobile-card-grid span,
+  .complaint-mobile-card .category-badge,
+  .complaint-mobile-card .priority-badge-compact,
+  .complaint-mobile-card .assigned-info,
+  .complaint-mobile-card .date-info {
+    align-self: flex-start !important;
+    text-align: left !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .complaint-mobile-card .mobile-card-actions { justify-content: flex-end !important; width: 100%; }
+  .complaint-table-container tbody td[data-label="Actions"] .action-buttons { justify-content: flex-end !important; justify-self: end !important; }
+}

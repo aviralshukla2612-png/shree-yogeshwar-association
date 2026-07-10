@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaCheck, FaClock, FaExclamationTriangle } from 'react-icons/fa';
+import { FaCheck, FaClock, FaExclamationTriangle, FaMoneyBillWave } from 'react-icons/fa';
 import './RecentMaintenance.css';
 
 const STATUS_COLORS = {
@@ -14,67 +14,71 @@ const STATUS_ICONS = {
   overdue: <FaExclamationTriangle />
 };
 
-const RecentMaintenance = ({ data, loading }) => {
-  const getStatusColor = (status) => STATUS_COLORS[status] || '#95a5a6';
-  const getStatusIcon = (status) => STATUS_ICONS[status] || <FaClock />;
+const PAYMENT_LABELS = {
+  gpay: 'Google Pay',
+  phonepay: 'PhonePe',
+  paytm: 'Paytm',
+  bank: 'Bank Transfer',
+  cash: 'Cash',
+  other: 'Other'
+};
 
+const RecentMaintenance = ({ data, loading }) => {
   if (loading) {
     return (
-      <div className="recent-maintenance">
-        <div className="recent-maintenance-loading" role="status" aria-live="polite">
-          <div className="recent-maintenance-spinner" aria-hidden="true" />
-          <p>Loading maintenance...</p>
-        </div>
+      <div className="rm-list">
+        <div className="rm-state"><div className="rm-spinner" /><p>Loading...</p></div>
       </div>
     );
   }
 
   if (!data || data.length === 0) {
     return (
-      <div className="recent-maintenance">
-        <div className="recent-maintenance-empty">
-          <span className="recent-maintenance-empty-icon" aria-hidden="true">M</span>
-          <p>No maintenance records</p>
-        </div>
+      <div className="rm-list">
+        <div className="rm-state"><p>No maintenance records</p></div>
       </div>
     );
   }
 
   return (
-    <div className="recent-maintenance">
-      <table className="recent-maintenance-table">
-        <caption className="recent-maintenance-caption">Recent maintenance records</caption>
-        <thead>
-          <tr>
-            <th>Resident</th>
-            <th>Flat</th>
-            <th className="recent-maintenance-amount-header">Amount</th>
-            <th>Due Date</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((item) => (
-            <tr key={item.id}>
-              <td data-label="Resident">{item.name}</td>
-              <td data-label="Flat">{item.flatNo}</td>
-              <td className="recent-maintenance-amount" data-label="Amount">
-                ₹{Number(item.amount).toLocaleString()}
-              </td>
-              <td data-label="Due Date">{item.dueDate}</td>
-              <td data-label="Status">
-                <span
-                  className={`recent-status-badge ${item.status}`}
-                  style={{ backgroundColor: getStatusColor(item.status) }}
-                >
-                  {getStatusIcon(item.status)}
-                  {item.status}
-                </span>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <div className="rm-list">
+      {data.map((item) => (
+        <div key={item.id} className="rm-card">
+          <div className="rm-row">
+            <span className="rm-label">Resident</span>
+            <span className="rm-value">{item.name}</span>
+          </div>
+          <div className="rm-row">
+            <span className="rm-label">Flat</span>
+            <span className="rm-value">{item.flatNo}</span>
+          </div>
+          <div className="rm-row">
+            <span className="rm-label">Amount</span>
+            <span className="rm-value rm-amount">₹{Number(item.amount).toLocaleString()}</span>
+          </div>
+          <div className="rm-row">
+            <span className="rm-label">Payment</span>
+            <span className="rm-value">
+              <span className="rm-payment">
+                <FaMoneyBillWave />
+                {PAYMENT_LABELS[item.paymentMode] || 'Cash'}
+              </span>
+            </span>
+          </div>
+          <div className="rm-row">
+            <span className="rm-label">Status</span>
+            <span className="rm-value">
+              <span
+                className={`rm-status ${item.status}`}
+                style={{ backgroundColor: STATUS_COLORS[item.status] || '#95a5a6' }}
+              >
+                {STATUS_ICONS[item.status] || <FaClock />}
+                {item.status}
+              </span>
+            </span>
+          </div>
+        </div>
+      ))}
     </div>
   );
 };

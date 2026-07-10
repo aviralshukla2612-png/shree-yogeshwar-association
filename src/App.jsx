@@ -23,6 +23,7 @@ import ReportsDashboard from './components/Reports/ReportsDashboard';
 import SettingsPage from './components/Settings/SettingsPage';
 import MyProfilePage from './components/Profile/MyProfilePage';
 import Toast from './components/Common/Toast';
+import CustomDialog from './components/Common/CustomDialog';
 import { expensesData } from "./data/expenses";
 import { maintenanceData } from "./data/maintenance";
 import { residentsData } from "./data/residents";
@@ -42,6 +43,8 @@ function App() {
     document.documentElement.setAttribute('data-theme', next ? 'dark' : 'light');
   };
   const [toast, setToast] = useState(null);
+  const [dialog, setDialog] = useState(null);
+  const dialogCallbackRef = useRef(null);
   const [loading, setLoading] = useState(false);
   const [isMobile, setIsMobile] = useState(() => window.innerWidth <= 992);
   const toastTimerRef = useRef(null);
@@ -49,12 +52,12 @@ function App() {
   
   const [maintenance, setMaintenance] = useState(maintenanceData);
   const [expenses, setExpenses] = useState(expensesData);
-  const [residents] = useState(residentsData);
+  const [residents, setResidents] = useState(residentsData);
   const [staff, setStaff] = useState(staffData);
   const [complaints, setComplaints] = useState([
-    { id: 1, resident: 'John Doe', issue: 'Water leakage', priority: 'High', status: 'In Progress' },
-    { id: 2, resident: 'Jane Smith', issue: 'Power outage', priority: 'High', status: 'Resolved' },
-    { id: 3, resident: 'Mike Johnson', issue: 'Noise complaint', priority: 'Medium', status: 'Pending' },
+    { id: 1, resident: 'John Doe', issue: 'Water leakage', priority: 'High', status: 'In Progress', createdAt: '2026-06-10' },
+    { id: 2, resident: 'Jane Smith', issue: 'Power outage', priority: 'High', status: 'Resolved', createdAt: '2026-06-22' },
+    { id: 3, resident: 'Mike Johnson', issue: 'Noise complaint', priority: 'Medium', status: 'Pending', createdAt: '2026-07-05' },
   ]);
 
   // ============================================
@@ -80,6 +83,23 @@ function App() {
   // TOAST NOTIFICATION
   // ============================================
   
+  const showDialog = (message, type = 'alert', title = '') => {
+    return new Promise((resolve) => {
+      dialogCallbackRef.current = resolve;
+      setDialog({ message, type, title });
+    });
+  };
+
+  const handleDialogConfirm = () => {
+    setDialog(null);
+    if (dialogCallbackRef.current) dialogCallbackRef.current(true);
+  };
+
+  const handleDialogCancel = () => {
+    setDialog(null);
+    if (dialogCallbackRef.current) dialogCallbackRef.current(false);
+  };
+
   const showToast = (message, type = 'success') => {
     window.clearTimeout(toastTimerRef.current);
     setToast({ message, type });
@@ -104,27 +124,57 @@ function App() {
   // ============================================
   
   const dashboardData = useMemo(() => {
-    // Calculate total flats from residents
     const totalFlats = residents.length;
-    
-    // Calculate paid maintenance count
     const paid = maintenance.filter(item => item.status === 'paid').length;
-    
-    // Calculate pending maintenance count (pending + overdue)
-    const pending = maintenance.filter(item => 
+    const overdueCount = maintenance.filter(item => item.status === 'overdue').length;
+    const pending = maintenance.filter(item =>
       item.status === 'pending' || item.status === 'overdue'
     ).length;
-    
-    // Calculate total income from PAID maintenance only
+
     const income = maintenance
       .filter(item => item.status === 'paid')
       .reduce((sum, item) => sum + Number(item.amount), 0);
-    
-    // Calculate total expenses
     const expense = expenses.reduce((sum, item) => sum + Number(item.amount), 0);
-    
-    // Calculate balance (income - expense)
     const balance = income - expense;
+
+    // Compute trends: compare current vs previous month
+    const now = new Date();
+    const thisMonth = now.getMonth();
+    const thisYear = now.getFullYear();
+    const prevMonth = thisMonth === 0 ? 11 : thisMonth - 1;
+    const prevYear = thisMonth === 0 ? thisYear - 1 : thisYear;
+
+    const isThisMonth = (dateStr) => {
+      const d = new Date(dateStr);
+      return d.getMonth() === thisMonth && d.getFullYear() === thisYear;
+    };
+    const isPrevMonth = (dateStr) => {
+      const d = new Date(dateStr);
+      return d.getMonth() === prevMonth && d.getFullYear() === prevYear;
+    };
+
+    const incomeThisMonth = maintenance
+      .filter(item => item.status === 'paid' && isThisMonth(item.dueDate))
+      .reduce((sum, item) => sum + Number(item.amount), 0);
+    const incomePrevMonth = maintenance
+      .filter(item => item.status === 'paid' && isPrevMonth(item.dueDate))
+      .reduce((sum, item) => sum + Number(item.amount), 0);
+
+    const expenseThisMonth = expenses
+      .filter(item => isThisMonth(item.date))
+      .reduce((sum, item) => sum + Number(item.amount), 0);
+    const expensePrevMonth = expenses
+      .filter(item => isPrevMonth(item.date))
+      .reduce((sum, item) => sum + Number(item.amount), 0);
+
+    const calcTrend = (curr, prev) => {
+      if (prev === 0) return curr > 0 ? 100 : 0;
+      return Math.round(((curr - prev) / prev) * 1000) / 10;
+    };
+
+    const incomeTrend = calcTrend(incomeThisMonth, incomePrevMonth);
+    const expenseTrend = calcTrend(expenseThisMonth, expensePrevMonth);
+    const collectionRate = totalFlats > 0 ? Math.round((paid / totalFlats) * 100) : 0;
 
     return {
       totalFlats,
@@ -134,9 +184,41 @@ function App() {
       expense,
       balance,
       totalStaff: staff.length,
-      totalResidents: residents.length
+      totalResidents: residents.length,
+      overdueCount,
+      incomeTrend,
+      expenseTrend,
+      collectionRate
     };
   }, [maintenance, expenses, residents, staff]);
+
+  // ============================================
+  // SYNC MAINTENANCE STATUS -> RESIDENTS
+  // ============================================
+
+  useEffect(() => {
+    setResidents(prev =>
+      prev.map(resident => {
+        const match = maintenance.find(m => m.flatNo === resident.flat);
+        return match ? { ...resident, maintenanceStatus: match.status } : resident;
+      })
+    );
+  }, [maintenance]);
+
+  // ============================================
+  // SYNC STAFF SALARY → EXPENSES
+  // ============================================
+
+  useEffect(() => {
+    const totalSalary = staff.reduce((sum, s) => sum + Number(s.salary), 0);
+    setExpenses(prev =>
+      prev.map(item =>
+        item.category === 'Staff Salary'
+          ? { ...item, amount: totalSalary }
+          : item
+      )
+    );
+  }, [staff]);
 
   // ============================================
   // AUTO-UPDATE OVERDUE STATUS
@@ -203,8 +285,9 @@ function App() {
     });
   };
 
-  const deleteMaintenance = (id) => {
-    if (window.confirm('Are you sure you want to delete this record?')) {
+  const deleteMaintenance = async (id) => {
+    const ok = await showDialog('Are you sure you want to delete this record?', 'confirm', 'Delete Record');
+    if (ok) {
       simulateLoading(() => {
         setMaintenance(prev => prev.filter(item => item.id !== id));
         showToast('Maintenance record deleted.', 'warning');
@@ -248,8 +331,9 @@ function App() {
     });
   };
 
-  const deleteExpense = (id) => {
-    if (window.confirm('Are you sure you want to delete this expense?')) {
+  const deleteExpense = async (id) => {
+    const ok = await showDialog('Are you sure you want to delete this expense?', 'confirm', 'Delete Expense');
+    if (ok) {
       simulateLoading(() => {
         setExpenses(prev => prev.filter(item => item.id !== id));
         showToast('Expense deleted.', 'warning');
@@ -294,8 +378,9 @@ function App() {
     });
   };
 
-  const deleteStaff = (id) => {
-    if (window.confirm('Are you sure you want to remove this staff member?')) {
+  const deleteStaff = async (id) => {
+    const ok = await showDialog('Are you sure you want to remove this staff member?', 'confirm', 'Remove Staff');
+    if (ok) {
       simulateLoading(() => {
         setStaff(prev => prev.filter(item => item.id !== id));
         showToast('Staff member removed.', 'warning');
@@ -345,6 +430,7 @@ function App() {
         onNavigate={setActiveTab}
         isDark={isDark}
         onToggleDark={toggleDarkMode}
+        showDialog={showDialog}
       />
       
       <div className="container">
@@ -356,6 +442,11 @@ function App() {
             onClose={() => setToast(null)}
           />
         )}
+        <CustomDialog
+          dialog={dialog}
+          onConfirm={handleDialogConfirm}
+          onCancel={handleDialogCancel}
+        />
 
         {/* ============================================
             NAVIGATION TABS - Only show on desktop
@@ -388,7 +479,7 @@ function App() {
                   <h3>Recent Maintenance</h3>
                 </div>
                 <RecentMaintenance 
-                  data={maintenance.slice(0, 5)} 
+                  data={[...maintenance].sort((a, b) => b.id - a.id).slice(0, 5)} 
                   loading={loading}
                 />
               </div>
@@ -415,6 +506,7 @@ function App() {
             onUpdate={updateMaintenance}
             onDelete={deleteMaintenance}
             loading={loading}
+            showDialog={showDialog}
           />
         )}
 
@@ -428,6 +520,7 @@ function App() {
             onUpdate={updateExpense}
             onDelete={deleteExpense}
             loading={loading}
+            showDialog={showDialog}
           />
         )}
 
@@ -441,6 +534,7 @@ function App() {
             onUpdate={updateStaff}
             onDelete={deleteStaff}
             loading={loading}
+            showDialog={showDialog}
           />
         )}
 
@@ -448,7 +542,7 @@ function App() {
             RESIDENTS CONTENT
             ============================================ */}
         {activeTab === 'residents' && (
-          <ResidentTable data={residents} loading={loading} />
+          <ResidentTable data={residents} loading={loading} showDialog={showDialog} />
         )}
 
         {/* ============================================
@@ -459,6 +553,7 @@ function App() {
             data={complaints}
             onUpdate={updateComplaint}
             loading={loading}
+            showDialog={showDialog}
           />
         )}
 
@@ -470,6 +565,7 @@ function App() {
             maintenanceData={maintenance}
             expenseData={expenses}
             complaintData={complaints}
+            showDialog={showDialog}
           />
         )}
 

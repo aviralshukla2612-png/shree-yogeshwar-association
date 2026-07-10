@@ -13,10 +13,14 @@ const DashboardCards = ({ data, loading }) => {
   const formatCurrency = (amount = 0) => {
     const value = Number(amount) || 0;
     const sign = value < 0 ? '-' : '';
-    return `${sign}\u20b9${Math.abs(value).toLocaleString()}`;
+    return `${sign}₹${Math.abs(value).toLocaleString()}`;
   };
 
-  // Ensure data exists and has all required fields
+  const incomeTrend = data?.incomeTrend ?? 0;
+  const expenseTrend = data?.expenseTrend ?? 0;
+  const collectionRate = data?.collectionRate ?? 0;
+  const overdueCount = data?.overdueCount ?? 0;
+
   const cards = [
     { 
       title: 'Residents', 
@@ -32,7 +36,7 @@ const DashboardCards = ({ data, loading }) => {
       icon: <FaCheckCircle />, 
       color: '#27AE60',
       bgColor: '#E8F8F0',
-      subtitle: 'Maintenance Paid' 
+      subtitle: `Collection rate ${collectionRate}%` 
     },
     { 
       title: 'Pending', 
@@ -40,7 +44,7 @@ const DashboardCards = ({ data, loading }) => {
       icon: <FaClock />, 
       color: '#F39C12',
       bgColor: '#FEF9E7',
-      subtitle: 'Awaiting Payment' 
+      subtitle: overdueCount > 0 ? `${overdueCount} overdue maintenance payments` : 'Awaiting Payment'
     },
     { 
       title: 'Income', 
@@ -48,7 +52,11 @@ const DashboardCards = ({ data, loading }) => {
       icon: <FaChartLine />, 
       color: '#2ECC71',
       bgColor: '#EAFAF1',
-      subtitle: 'Total Collection' 
+      subtitle: incomeTrend > 0
+        ? `↑ ${incomeTrend}% compared to last month`
+        : incomeTrend < 0
+        ? `↓ ${Math.abs(incomeTrend)}% compared to last month`
+        : 'Total Collection'
     },
     { 
       title: 'Expense', 
@@ -56,7 +64,11 @@ const DashboardCards = ({ data, loading }) => {
       icon: <FaChartBar />, 
       color: '#E74C3C',
       bgColor: '#FDEDEC',
-      subtitle: 'Total Spending' 
+      subtitle: expenseTrend > 0
+        ? `↑ ${expenseTrend}% compared to last month`
+        : expenseTrend < 0
+        ? `↓ ${Math.abs(expenseTrend)}% compared to last month`
+        : 'Total Spending'
     },
     { 
       title: 'Balance', 
@@ -68,7 +80,6 @@ const DashboardCards = ({ data, loading }) => {
     }
   ];
 
-  // Loading state
   if (loading) {
     return (
       <div className="dashboard-cards">
@@ -94,7 +105,8 @@ const DashboardCards = ({ data, loading }) => {
           className="card" 
           style={{ 
             borderBottom: `4px solid ${card.color}`,
-            background: card.bgColor
+            '--card-bg': card.bgColor,
+            '--card-color': card.color
           }}
         >
           <div className="card-icon" style={{ color: card.color, background: `${card.color}15` }}>

@@ -3,7 +3,7 @@ import Modal from '../Common/Modal';
 import Button from '../Common/Button';
 import './AddStaffModal.css';
 
-const AddStaffModal = ({ onClose, onAdd }) => {
+const AddStaffModal = ({ onClose, onAdd, showDialog }) => {
   const [formData, setFormData] = useState({
     name: '',
     role: '',
@@ -14,25 +14,21 @@ const AddStaffModal = ({ onClose, onAdd }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
-    // Validate
+
     if (!formData.name.trim()) {
-      alert('Please enter staff name');
+      showDialog('Please enter staff name', 'alert', 'Validation Error');
       return;
     }
     if (!formData.role) {
-      alert('Please select a role');
+      showDialog('Please select a role', 'alert', 'Validation Error');
       return;
     }
     if (!formData.salary || parseFloat(formData.salary) <= 0) {
-      alert('Please enter a valid salary');
+      showDialog('Please enter a valid salary', 'alert', 'Validation Error');
       return;
     }
 
-    onAdd({
-      ...formData,
-      salary: parseFloat(formData.salary)
-    });
+    onAdd({ ...formData, salary: parseFloat(formData.salary) });
     onClose();
   };
 
@@ -43,21 +39,11 @@ const AddStaffModal = ({ onClose, onAdd }) => {
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label>Name *</label>
-            <input
-              type="text"
-              required
-              placeholder="Enter staff name"
-              value={formData.name}
-              onChange={(e) => setFormData({...formData, name: e.target.value})}
-            />
+            <input type="text" required placeholder="Enter staff name" value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} />
           </div>
           <div className="form-group">
             <label>Role *</label>
-            <select
-              required
-              value={formData.role}
-              onChange={(e) => setFormData({...formData, role: e.target.value})}
-            >
+            <select required value={formData.role} onChange={(e) => setFormData({...formData, role: e.target.value})}>
               <option value="">Select Role</option>
               <option value="Security">Security</option>
               <option value="Cleaner">Cleaner</option>
@@ -69,30 +55,15 @@ const AddStaffModal = ({ onClose, onAdd }) => {
           </div>
           <div className="form-group">
             <label>Salary (₹) *</label>
-            <input
-              type="number"
-              required
-              min="1"
-              placeholder="Enter salary amount"
-              value={formData.salary}
-              onChange={(e) => setFormData({...formData, salary: e.target.value})}
-            />
+            <input type="number" required min="1" placeholder="Enter salary amount" value={formData.salary} onChange={(e) => setFormData({...formData, salary: e.target.value})} />
           </div>
           <div className="form-group">
             <label>Phone</label>
-            <input
-              type="tel"
-              placeholder="Enter phone number"
-              value={formData.phone}
-              onChange={(e) => setFormData({...formData, phone: e.target.value})}
-            />
+            <input type="tel" placeholder="Enter phone number" value={formData.phone} onChange={(e) => setFormData({...formData, phone: e.target.value})} />
           </div>
           <div className="form-group">
             <label>Payment Mode</label>
-            <select
-              value={formData.paymentMode}
-              onChange={(e) => setFormData({...formData, paymentMode: e.target.value})}
-            >
+            <select value={formData.paymentMode} onChange={(e) => setFormData({...formData, paymentMode: e.target.value})}>
               <option value="cash">Cash</option>
               <option value="gpay">Google Pay</option>
               <option value="phonepay">PhonePe</option>
@@ -102,12 +73,8 @@ const AddStaffModal = ({ onClose, onAdd }) => {
             </select>
           </div>
           <div className="modal-actions">
-            <Button type="button" variant="secondary" onClick={onClose}>
-              Cancel
-            </Button>
-            <Button type="submit" variant="primary">
-              Add Staff
-            </Button>
+            <Button type="button" variant="secondary" onClick={onClose}>Cancel</Button>
+            <Button type="submit" variant="primary">Add Staff</Button>
           </div>
         </form>
       </div>

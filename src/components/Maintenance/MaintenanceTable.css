@@ -981,7 +981,7 @@
 
 .mobile-card-head {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: flex-start;
   margin-bottom: 0.5rem;
 }
@@ -1029,7 +1029,7 @@
 .mobile-card-actions {
   display: flex;
   gap: 0.4rem;
-  justify-content: flex-end;
+  justify-content: flex-start;
 }
 
 /* Mobile Edit Bottom Sheet */
@@ -1286,4 +1286,83 @@
   flex-wrap: nowrap;
   gap: 0.5rem;
   margin-bottom: 0.75rem;
+}
+
+/* ============================================
+   MOBILE - ALL LEFT ALIGNED (OVERRIDE)
+   ============================================ */
+
+@media (max-width: 768px) {
+  .maintenance-table-container tbody td {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
+    text-align: left !important;
+    padding: 0 !important;
+    font-size: 0.68rem;
+    white-space: normal;
+  }
+
+  .maintenance-table-container tbody td::before {
+    display: block !important;
+    content: attr(data-label) !important;
+    margin-bottom: 0.08rem;
+    color: #95a5a6;
+    font-size: 0.52rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    text-align: left !important;
+  }
+
+  .maintenance-table-container tbody td[data-label="Actions"] {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    grid-column: 1 / -1;
+  }
+
+  .maintenance-table-container tbody td[data-label="Actions"] .action-buttons {
+    justify-content: flex-start !important;
+    justify-self: start !important;
+  }
+
+  .payment-mode-badge {
+    text-align: left !important;
+    align-self: flex-start !important;
+  }
+
+  .status-badge {
+    align-self: flex-start !important;
+  }
+}
+
+/* ============================================
+   FORCE LEFT ALIGNMENT - ALL MOBILE
+   ============================================ */
+@media (max-width: 768px) {
+  .mobile-card-head {
+    justify-content: flex-start !important;
+    gap: 0.5rem !important;
+  }
+  .mobile-card-actions {
+    justify-content: flex-start !important;
+  }
+  .mobile-card-grid > div {
+    align-items: flex-start !important;
+    text-align: left !important;
+  }
+  .mobile-card-grid strong,
+  .mobile-card-grid span,
+  .payment-mode-badge,
+  .status-badge {
+    align-self: flex-start !important;
+    text-align: left !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .mobile-card-actions { justify-content: flex-end !important; width: 100%; }
+  .maintenance-table-container tbody td[data-label="Actions"] .action-buttons { justify-content: flex-end !important; justify-self: end !important; }
 }

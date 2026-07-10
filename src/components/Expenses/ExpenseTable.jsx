@@ -324,7 +324,7 @@ const ExpenseTable = ({ data, onAdd, onUpdate, onDelete, loading }) => {
       </div>
 
       {/* Mobile Card List */}
-      <div className="expense-mobile-list">
+      <div className="expense-mobile-list mobile-view">
         {loading ? (
           <div className="loading-state"><div className="spinner" /><p>Loading expenses...</p></div>
         ) : filteredData.length === 0 ? (
@@ -335,22 +335,40 @@ const ExpenseTable = ({ data, onAdd, onUpdate, onDelete, loading }) => {
           </div>
         ) : (
           paginatedData.map((expense) => (
-            <div key={expense.id} className="expense-mobile-card">
-              <div className="mobile-card-head">
-                <span className="category-badge" style={{ backgroundColor: getCategoryColor(expense.category) }}>
-                  {getCategoryIcon(expense.category)} {expense.category}
+            <div key={expense.id} className="kv-card">
+              <div className="kv-row">
+                <span className="kv-label">Category</span>
+                <span className="kv-value">
+                  <span className="category-badge" style={{ backgroundColor: getCategoryColor(expense.category) }}>
+                    {getCategoryIcon(expense.category)} {expense.category}
+                  </span>
                 </span>
-                <strong className={`amount-value ${isHighExpense(expense.amount) ? 'high' : ''}`}>
-                  ₹{Number(expense.amount).toLocaleString()}
-                </strong>
               </div>
-              <div className="mobile-card-grid">
-                <div><small>Date</small><strong>{expense.date}</strong></div>
-                <div><small>Payment</small><span className="payment-method"><FaCreditCard /> {getPaymentMethod(expense.id)}</span></div>
-                <div><small>Approved</small><span className="approved-by"><FaUserCheck /> {getApprovedBy(expense.id)}</span></div>
-                <div><small>Description</small><strong>{expense.description || '-'}</strong></div>
+              <div className="kv-row">
+                <span className="kv-label">Amount</span>
+                <span className="kv-value kv-amount">₹{Number(expense.amount).toLocaleString()}</span>
               </div>
-              <div className="mobile-card-actions">
+              <div className="kv-row">
+                <span className="kv-label">Date</span>
+                <span className="kv-value">{expense.date}</span>
+              </div>
+              <div className="kv-row">
+                <span className="kv-label">Payment</span>
+                <span className="kv-value">
+                  <span className="payment-method"><FaCreditCard /> {getPaymentMethod(expense.id)}</span>
+                </span>
+              </div>
+              <div className="kv-row">
+                <span className="kv-label">Approved</span>
+                <span className="kv-value">
+                  <span className="approved-by"><FaUserCheck /> {getApprovedBy(expense.id)}</span>
+                </span>
+              </div>
+              <div className="kv-row">
+                <span className="kv-label">Description</span>
+                <span className="kv-value kv-desc">{expense.description || '-'}</span>
+              </div>
+              <div className="kv-actions">
                 <button className="action-btn edit" onClick={() => startEdit(expense)}><FaEdit /> Edit</button>
                 <button className="action-btn delete" onClick={() => handleDeleteExpense(expense.id)}><FaTrash /> Delete</button>
               </div>

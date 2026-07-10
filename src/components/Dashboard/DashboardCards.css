@@ -3,7 +3,7 @@
 .dashboard-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(clamp(130px, 15vw, 180px), 1fr)); gap: clamp(0.5rem, 1.5vw, 1rem); margin-bottom: clamp(1rem, 2vw, 2rem); width: 100%; }
 
 .card {
-  background: white;
+  background: var(--card-bg, white);
   padding: clamp(1rem, 1.2vw, 1.35rem);
   border-radius: 14px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
@@ -196,29 +196,11 @@
   .card-content h3 { font-size: 0.48rem; }
 }
 
-/* Dark Mode Support */
-@media (prefers-color-scheme: dark) {
-  .card { background: #2c3e50; border-color: rgba(255, 255, 255, 0.05); }
-  .card-content h3 { color: #95a5a6; }
-  .card-value { color: #ecf0f1; }
-  .card-subtitle { color: #7f8c8d; }
-  .skeleton-icon, .skeleton-text { background: #34495e; }
-  .card:last-child { background: #3d1a1a; border-bottom: 4px solid #e74c3c; }
-  .card:last-child .card-value { color: #e74c3c; }
-  .card:last-child .card-icon { background: #3d1a1a !important; color: #e74c3c !important; }
-  .card:last-child.positive { background: #1a3d1a; border-bottom: 4px solid #27ae60; }
-  .card:last-child.positive .card-value { color: #27ae60; }
-  .card:last-child.positive .card-icon { background: #1a3d1a !important; color: #27ae60 !important; }
-}
-
-/* Dark Mode - data-theme toggle */
-[data-theme="dark"] .card { background: #2c3e50; border-color: rgba(255,255,255,0.05); }
-[data-theme="dark"] .card:hover { background: #34495e; box-shadow: 0 8px 30px rgba(0,0,0,0.3); }
+/* Dark Mode */
+[data-theme="dark"] .card { background: #2c3e50 !important; border-color: rgba(255,255,255,0.05); }
+[data-theme="dark"] .card:hover { background: #34495e !important; box-shadow: 0 8px 30px rgba(0,0,0,0.3); }
 [data-theme="dark"] .card-content h3 { color: #95a5a6; }
-[data-theme="dark"] .card-value { color: #ecf0f1; }
+[data-theme="dark"] .card-value { color: #ecf0f1 !important; }
 [data-theme="dark"] .card-subtitle { color: #7f8c8d; }
 [data-theme="dark"] .skeleton-icon, [data-theme="dark"] .skeleton-text { background: #34495e; }
-[data-theme="dark"] .card:last-child { background: #3d1a1a; border-bottom: 4px solid #e74c3c; }
-[data-theme="dark"] .card:last-child .card-value { color: #e74c3c; }
-[data-theme="dark"] .card:last-child.positive { background: #1a3d1a; border-bottom: 4px solid #27ae60; }
-[data-theme="dark"] .card:last-child.positive .card-value { color: #27ae60; }
+[data-theme="dark"] .card-icon { background: rgba(255,255,255,0.08) !important; }

@@ -1034,7 +1034,7 @@
 
 .expense-mobile-card .mobile-card-head {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   margin-bottom: 0.5rem;
 }
@@ -1070,7 +1070,7 @@
 .expense-mobile-card .mobile-card-actions {
   display: flex;
   gap: 0.4rem;
-  justify-content: flex-end;
+  justify-content: flex-start;
 }
 
 /* ============================================
@@ -1313,4 +1313,91 @@
 [data-theme="dark"] .payment-method {
   background: #34495e !important;
   color: #ecf0f1 !important;
+}
+
+/* ============================================
+   MOBILE - ALL LEFT ALIGNED (OVERRIDE)
+   ============================================ */
+
+@media (max-width: 768px) {
+  .expense-table-container tbody td {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
+    text-align: left !important;
+    padding: 0 !important;
+    font-size: 0.68rem;
+  }
+
+  .expense-table-container tbody td::before {
+    display: block !important;
+    content: attr(data-label) !important;
+    margin-bottom: 0.08rem;
+    color: #95a5a6;
+    font-size: 0.52rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    text-align: left !important;
+  }
+
+  .expense-table-container tbody td[data-label="Actions"] {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    grid-column: 1 / -1;
+  }
+
+  .expense-table-container tbody td[data-label="Actions"] .action-buttons {
+    justify-content: flex-start !important;
+  }
+
+  .amount-cell,
+  .amount-wrapper {
+    text-align: left !important;
+    justify-content: flex-start !important;
+  }
+
+  .payment-method {
+    align-self: flex-start !important;
+  }
+
+  .category-badge {
+    align-self: flex-start !important;
+  }
+
+  .approved-by {
+    text-align: left !important;
+  }
+}
+
+/* ============================================
+   FORCE LEFT ALIGNMENT - ALL MOBILE
+   ============================================ */
+@media (max-width: 768px) {
+  .expense-mobile-card .mobile-card-head {
+    justify-content: flex-start !important;
+    gap: 0.5rem !important;
+  }
+  .expense-mobile-card .mobile-card-actions {
+    justify-content: flex-start !important;
+  }
+  .expense-mobile-card .mobile-card-grid > div {
+    align-items: flex-start !important;
+    text-align: left !important;
+  }
+  .expense-mobile-card .mobile-card-grid strong,
+  .expense-mobile-card .mobile-card-grid span,
+  .expense-mobile-card .amount-value,
+  .expense-mobile-card .payment-method,
+  .expense-mobile-card .category-badge {
+    align-self: flex-start !important;
+    text-align: left !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .expense-mobile-card .mobile-card-actions { justify-content: flex-end !important; width: 100%; }
+  .expense-table-container tbody td[data-label="Actions"] .action-buttons { justify-content: flex-end !important; justify-self: end !important; }
 }

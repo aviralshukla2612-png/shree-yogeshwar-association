@@ -219,44 +219,43 @@
 }
 
 /* Dark Mode Support */
-@media (prefers-color-scheme: dark) {
-  .toast {
-    background: #2c3e50;
-  }
+[data-theme="dark"] .toast {
+  background: #1a1a1a;
+  color: #ffffff;
+}
 
-  .toast-title {
-    color: #ecf0f1;
-  }
+[data-theme="dark"] .toast-title {
+  color: #ffffff;
+}
 
-  .toast-message {
-    color: #bdc3c7;
-  }
+[data-theme="dark"] .toast-message {
+  color: #cccccc;
+}
 
-  .toast-success .toast-icon-wrapper {
-    background: rgba(39, 174, 96, 0.2);
-  }
+[data-theme="dark"] .toast-success .toast-icon-wrapper {
+  background: #1a3d2a;
+}
 
-  .toast-error .toast-icon-wrapper {
-    background: rgba(231, 76, 60, 0.2);
-  }
+[data-theme="dark"] .toast-error .toast-icon-wrapper {
+  background: #3d1a1a;
+}
 
-  .toast-warning .toast-icon-wrapper {
-    background: rgba(243, 156, 18, 0.2);
-  }
+[data-theme="dark"] .toast-warning .toast-icon-wrapper {
+  background: #3d2e0a;
+}
 
-  .toast-info .toast-icon-wrapper {
-    background: rgba(52, 152, 219, 0.2);
-  }
+[data-theme="dark"] .toast-info .toast-icon-wrapper {
+  background: #1a2a3d;
+}
 
-  .toast-close {
-    color: #95a5a6;
-  }
+[data-theme="dark"] .toast-close {
+  color: #aaaaaa;
+}
 
-  .toast-close:hover {
-    color: #ecf0f1;
-  }
+[data-theme="dark"] .toast-close:hover {
+  color: #ffffff;
+}
 
-  .toast-progress {
-    background: #34495e;
-  }
+[data-theme="dark"] .toast-progress {
+  background: #333333;
 }

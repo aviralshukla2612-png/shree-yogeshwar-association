@@ -1055,6 +1055,315 @@ textarea {
     background: #fff;
     text-align: center !important;
   }
+
+  /* Key-Value Card styles modeled after RecentMaintenance */
+  .kv-card {
+    background: #f8fafc;
+    border-radius: 8px;
+    padding: 0.6rem 0.8rem;
+    border: 1px solid #e6ebf1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    margin-bottom: 0.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+  }
+
+  .kv-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.35rem 0;
+    border-bottom: 1px solid #edf1f5;
+  }
+
+  .kv-row:last-of-type {
+    border-bottom: none;
+  }
+
+  .kv-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #7f8c8d;
+    flex-shrink: 0;
+    text-align: left;
+  }
+
+  .kv-value {
+    font-size: 0.78rem;
+    color: #2c3e50;
+    text-align: right;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.3rem;
+  }
+
+  .kv-value.kv-bold {
+    font-weight: 700;
+    color: #1f2d3d;
+  }
+
+  .kv-amount {
+    font-weight: 700;
+    color: #1f2d3d;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .kv-desc {
+    max-width: 60%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #7f8c8d;
+  }
+
+  /* Badges inside KV values */
+  .kv-payment-badge,
+  .payment-method,
+  .approved-by {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.72rem;
+    color: #5d6d7e;
+    font-weight: 500;
+  }
+
+  .kv-payment-badge svg,
+  .payment-method svg,
+  .approved-by svg {
+    font-size: 0.65rem;
+    color: #27ae60;
+  }
+
+  .approved-by svg {
+    color: #3498db;
+  }
+
+  /* Actions row styling */
+  .kv-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    margin-top: 0.4rem;
+    padding-top: 0.4rem;
+    border-top: 1px solid #edf1f5;
+  }
+
+  .kv-actions .action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.3rem 0.6rem;
+    border-radius: 6px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all 0.2s ease;
+  }
+
+  .kv-actions .action-btn.edit {
+    background: #ebf5fb;
+    color: #2980b9;
+  }
+  .kv-actions .action-btn.edit:hover {
+    background: #2980b9;
+    color: white;
+  }
+
+  .kv-actions .action-btn.delete {
+    background: #fdebd0;
+    color: #d35400;
+  }
+  .kv-actions .action-btn.delete:hover {
+    background: #e74c3c;
+    color: white;
+  }
+
+  /* Dark mode support for Key-Value Cards */
+  [data-theme="dark"] .kv-card {
+    background: #34495e;
+    border-color: #46637a;
+    box-shadow: none;
+  }
+
+  [data-theme="dark"] .kv-row {
+    border-bottom-color: #46637a;
+  }
+
+  [data-theme="dark"] .kv-label {
+    color: #95a5a6;
+  }
+
+  [data-theme="dark"] .kv-value {
+    color: #ecf0f1;
+  }
+
+  [data-theme="dark"] .kv-value.kv-bold,
+  [data-theme="dark"] .kv-amount {
+    color: #ffffff;
+  }
+
+  [data-theme="dark"] .kv-payment-badge,
+  [data-theme="dark"] .payment-method,
+  [data-theme="dark"] .approved-by {
+    color: #b2bec3;
+  }
+
+  [data-theme="dark"] .kv-actions {
+    border-top-color: #46637a;
+  }
+
+  [data-theme="dark"] .kv-actions .action-btn.edit {
+    background: #2c3e50;
+    border-color: #3498db;
+    color: #3498db;
+  }
+  [data-theme="dark"] .kv-actions .action-btn.edit:hover {
+    background: #3498db;
+    color: white;
+  }
+
+  [data-theme="dark"] .kv-actions .action-btn.delete {
+    background: #2c3e50;
+    border-color: #e74c3c;
+    color: #e74c3c;
+  }
+  [data-theme="dark"] .kv-actions .action-btn.delete:hover {
+    background: #e74c3c;
+    color: white;
+  }
+
+  /* Badge styling overrides for Key-Value Cards */
+  .kv-card .status-badge {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0.25rem !important;
+    padding: 0.15rem 0.55rem !important;
+    border-radius: 999px !important;
+    color: white !important;
+    font-size: 0.65rem !important;
+    font-weight: 700 !important;
+    text-transform: capitalize !important;
+    white-space: nowrap !important;
+    box-shadow: none !important;
+    justify-self: auto !important;
+    margin: 0 !important;
+  }
+
+  .kv-card .status-badge svg {
+    display: inline-block !important;
+    font-size: 0.55rem !important;
+    margin: 0 !important;
+    color: white !important;
+  }
+
+  .kv-card .category-badge {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0.25rem !important;
+    padding: 0.15rem 0.55rem !important;
+    border-radius: 999px !important;
+    color: white !important;
+    font-size: 0.65rem !important;
+    font-weight: 700 !important;
+    text-transform: capitalize !important;
+    white-space: nowrap !important;
+    box-shadow: none !important;
+    justify-self: auto !important;
+    margin: 0 !important;
+  }
+
+  .kv-card .category-badge svg {
+    display: inline-block !important;
+    font-size: 0.55rem !important;
+    margin: 0 !important;
+    color: white !important;
+  }
+
+  .kv-card .priority-badge-compact {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0.25rem !important;
+    padding: 0.15rem 0.55rem !important;
+    border-radius: 999px !important;
+    font-size: 0.65rem !important;
+    font-weight: 700 !important;
+    text-transform: capitalize !important;
+    white-space: nowrap !important;
+    box-shadow: none !important;
+    justify-self: auto !important;
+    margin: 0 !important;
+    background: #f1f2f6 !important;
+    color: #2c3e50 !important;
+  }
+
+  .kv-card .priority-badge-compact svg {
+    display: inline-block !important;
+    font-size: 0.55rem !important;
+    margin: 0 !important;
+    color: #2c3e50 !important;
+  }
+
+  .kv-card .priority-badge-compact.high {
+    background: #fadbd8 !important;
+    color: #c0392b !important;
+  }
+  .kv-card .priority-badge-compact.high svg {
+    color: #c0392b !important;
+  }
+  .kv-card .priority-badge-compact.medium {
+    background: #fdebd0 !important;
+    color: #d35400 !important;
+  }
+  .kv-card .priority-badge-compact.medium svg {
+    color: #d35400 !important;
+  }
+  .kv-card .priority-badge-compact.low {
+    background: #d4efdf !important;
+    color: #27ae60 !important;
+  }
+  .kv-card .priority-badge-compact.low svg {
+    color: #27ae60 !important;
+  }
+
+  /* Dark mode overrides for Key-Value Card Badges */
+  [data-theme="dark"] .kv-card .priority-badge-compact {
+    background: #2c3e50 !important;
+    color: #ecf0f1 !important;
+  }
+  [data-theme="dark"] .kv-card .priority-badge-compact svg {
+    color: #ecf0f1 !important;
+  }
+  [data-theme="dark"] .kv-card .priority-badge-compact.high {
+    background: #78281f !important;
+    color: #f9d5d3 !important;
+  }
+  [data-theme="dark"] .kv-card .priority-badge-compact.high svg {
+    color: #f9d5d3 !important;
+  }
+  [data-theme="dark"] .kv-card .priority-badge-compact.medium {
+    background: #7e5109 !important;
+    color: #fdebd0 !important;
+  }
+  [data-theme="dark"] .kv-card .priority-badge-compact.medium svg {
+    color: #fdebd0 !important;
+  }
+  [data-theme="dark"] .kv-card .priority-badge-compact.low {
+    background: #145a32 !important;
+    color: #d4efdf !important;
+  }
+  [data-theme="dark"] .kv-card .priority-badge-compact.low svg {
+    color: #d4efdf !important;
+  }
 }
 
 @media (max-width: 380px) {

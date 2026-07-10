@@ -52,7 +52,7 @@ export const exportToExcel = (data, columns, fileName) => {
     saveAs(blob, `${fileName}_${today()}.xlsx`);
   } catch (err) {
     console.error('Excel export error:', err);
-    alert('Excel export failed. Please try again.');
+    console.error('Excel export failed.');
   }
 };
 

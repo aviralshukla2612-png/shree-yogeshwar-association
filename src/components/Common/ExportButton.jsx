@@ -13,7 +13,7 @@ const ExportButton = ({
   
   const exportToExcel = () => {
     if (!data || data.length === 0) {
-      alert('No data to export.');
+      console.warn('No data to export.');
       return;
     }
 
@@ -69,7 +69,7 @@ const ExportButton = ({
       saveAs(blob, `${fileName}_${date}.xlsx`);
 
     } catch {
-      alert('Error exporting data. Please try again.');
+      console.error('Error exporting data.');
     }
   };
 

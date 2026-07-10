@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { FaSearch, FaPlus, FaEdit, FaTrash, FaCheck, FaClock, FaExclamationTriangle, FaSave, FaTimes, FaFilePdf, FaFileExcel, FaPrint } from 'react-icons/fa';
+import { FaSearch, FaPlus, FaEdit, FaTrash, FaCheck, FaClock, FaExclamationTriangle, FaSave, FaTimes, FaFilePdf, FaFileExcel, FaPrint, FaMoneyBillWave } from 'react-icons/fa';
 import AddMaintenanceModal from './AddMaintenanceModal';
 import { exportMaintenancePDF, exportMaintenanceExcel } from '../../utils/exportUtils';
 import './MaintenanceTable.css';
 
-const MaintenanceTable = ({ data, onAdd, onUpdate, onDelete, loading: _loading }) => {
+const MaintenanceTable = ({ data, onAdd, onUpdate, onDelete, loading: _loading, showDialog }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [filterStatus, setFilterStatus] = useState('all');
@@ -27,9 +27,9 @@ const MaintenanceTable = ({ data, onAdd, onUpdate, onDelete, loading: _loading }
       const selectedDate = new Date(editData.dueDate);
       const currentDate = new Date();
       currentDate.setHours(0, 0, 0, 0);
-      if (selectedDate > currentDate) { alert('Due date cannot be in the future.'); return; }
+      if (selectedDate > currentDate) { showDialog('Due date cannot be in the future.', 'alert', 'Invalid Date'); return; }
     }
-    if (editData.amount && parseFloat(editData.amount) <= 0) { alert('Amount must be greater than 0.'); return; }
+    if (editData.amount && parseFloat(editData.amount) <= 0) { showDialog('Amount must be greater than 0.', 'alert', 'Invalid Amount'); return; }
     onUpdate(editingId, editData);
     setEditingId(null);
     setEditData({});
@@ -217,22 +217,40 @@ const MaintenanceTable = ({ data, onAdd, onUpdate, onDelete, loading: _loading }
           </div>
         ) : (
           filteredData.map((item) => (
-            <div key={item.id} className="maintenance-mobile-card">
-              <div className="mobile-card-head">
-                <div>
-                  <h3>{item.name}</h3>
-                  <span>{item.flatNo}</span>
-                </div>
-                <span className={`status-badge ${item.status}`} style={{ backgroundColor: getStatusColor(item.status) }}>
-                  {getStatusIcon(item.status)} {item.status}
+            <div key={item.id} className="kv-card">
+              <div className="kv-row">
+                <span className="kv-label">Resident</span>
+                <span className="kv-value kv-bold">{item.name}</span>
+              </div>
+              <div className="kv-row">
+                <span className="kv-label">Flat</span>
+                <span className="kv-value">{item.flatNo}</span>
+              </div>
+              <div className="kv-row">
+                <span className="kv-label">Amount</span>
+                <span className="kv-value kv-amount">₹{item.amount.toLocaleString()}</span>
+              </div>
+              <div className="kv-row">
+                <span className="kv-label">Due Date</span>
+                <span className="kv-value">{item.dueDate}</span>
+              </div>
+              <div className="kv-row">
+                <span className="kv-label">Payment</span>
+                <span className="kv-value">
+                  <span className="kv-payment-badge">
+                    <FaMoneyBillWave />{getPaymentModeLabel(item.paymentMode || 'cash')}
+                  </span>
                 </span>
               </div>
-              <div className="mobile-card-grid">
-                <div><small>Amount</small><strong>₹{item.amount.toLocaleString()}</strong></div>
-                <div><small>Due Date</small><strong>{item.dueDate}</strong></div>
-                <div><small>Payment Mode</small><span className="payment-mode-badge">{getPaymentModeLabel(item.paymentMode || 'cash')}</span></div>
+              <div className="kv-row">
+                <span className="kv-label">Status</span>
+                <span className="kv-value">
+                  <span className={`status-badge ${item.status}`} style={{ backgroundColor: getStatusColor(item.status) }}>
+                    {getStatusIcon(item.status)} {item.status}
+                  </span>
+                </span>
               </div>
-              <div className="mobile-card-actions">
+              <div className="kv-actions">
                 <button className="action-btn edit" onClick={() => startEdit(item)}><FaEdit /> Edit</button>
                 <button className="action-btn delete" onClick={() => onDelete(item.id)}><FaTrash /> Delete</button>
               </div>
@@ -290,7 +308,7 @@ const MaintenanceTable = ({ data, onAdd, onUpdate, onDelete, loading: _loading }
       )}
 
       {showModal && (
-        <AddMaintenanceModal onClose={() => setShowModal(false)} onAdd={onAdd} />
+        <AddMaintenanceModal onClose={() => setShowModal(false)} onAdd={onAdd} showDialog={showDialog} />
       )}
     </div>
   );
