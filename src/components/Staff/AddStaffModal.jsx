@@ -27,6 +27,10 @@ const AddStaffModal = ({ onClose, onAdd, showDialog }) => {
       showDialog('Please enter a valid salary', 'alert', 'Validation Error');
       return;
     }
+    if (formData.phone && formData.phone.length !== 10) {
+      showDialog('Phone number must be exactly 10 digits', 'alert', 'Validation Error');
+      return;
+    }
 
     onAdd({ ...formData, salary: parseFloat(formData.salary) });
     onClose();
@@ -39,7 +43,7 @@ const AddStaffModal = ({ onClose, onAdd, showDialog }) => {
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label>Name *</label>
-            <input type="text" required placeholder="Enter staff name" value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} />
+            <input type="text" required placeholder="Enter staff name" value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value.replace(/[^a-zA-Z\s]/g, '')})} />
           </div>
           <div className="form-group">
             <label>Role *</label>
@@ -59,7 +63,7 @@ const AddStaffModal = ({ onClose, onAdd, showDialog }) => {
           </div>
           <div className="form-group">
             <label>Phone</label>
-            <input type="tel" placeholder="Enter phone number" value={formData.phone} onChange={(e) => setFormData({...formData, phone: e.target.value})} />
+            <input type="tel" placeholder="Enter 10-digit phone number" value={formData.phone} onChange={(e) => setFormData({...formData, phone: e.target.value.replace(/\D/g, '').slice(0, 10)})} />
           </div>
           <div className="form-group">
             <label>Payment Mode</label>

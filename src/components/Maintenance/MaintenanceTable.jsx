@@ -30,6 +30,7 @@ const MaintenanceTable = ({ data, onAdd, onUpdate, onDelete, loading: _loading, 
       if (selectedDate > currentDate) { showDialog('Due date cannot be in the future.', 'alert', 'Invalid Date'); return; }
     }
     if (editData.amount && parseFloat(editData.amount) <= 0) { showDialog('Amount must be greater than 0.', 'alert', 'Invalid Amount'); return; }
+    if (editData.amount && parseFloat(editData.amount) > 10000) { showDialog('Maintenance amount cannot exceed ₹10,000.', 'alert', 'Invalid Amount'); return; }
     onUpdate(editingId, editData);
     setEditingId(null);
     setEditData({});
@@ -131,7 +132,7 @@ const MaintenanceTable = ({ data, onAdd, onUpdate, onDelete, loading: _loading, 
                 <tr key={item.id} className={editingId === item.id ? 'editing' : ''}>
                   <td data-label="Resident">
                     {editingId === item.id ? (
-                      <input type="text" value={editData.name || ''} onChange={(e) => setEditData({...editData, name: e.target.value})} className="edit-input" />
+                      <input type="text" value={editData.name || ''} onChange={(e) => setEditData({...editData, name: e.target.value.replace(/[^a-zA-Z\s]/g, '')})} className="edit-input" />
                     ) : item.name}
                   </td>
                   <td data-label="Flat No">
@@ -141,7 +142,15 @@ const MaintenanceTable = ({ data, onAdd, onUpdate, onDelete, loading: _loading, 
                   </td>
                   <td data-label="Amount">
                     {editingId === item.id ? (
-                      <input type="number" min="1" value={editData.amount || ''} onChange={(e) => setEditData({...editData, amount: parseFloat(e.target.value)})} className="edit-input" />
+                      <input 
+                        type="text" 
+                        value={editData.amount || ''} 
+                        onChange={(e) => {
+                          const cleaned = e.target.value.replace(/[^0-9]/g, '');
+                          setEditData({...editData, amount: cleaned ? parseInt(cleaned, 10) : ''});
+                        }} 
+                        className="edit-input" 
+                      />
                     ) : `₹${item.amount.toLocaleString()}`}
                   </td>
                   <td data-label="Due Date">

@@ -13,7 +13,7 @@ const AddMaintenanceModal = ({ onClose, onAdd, showDialog }) => {
     paymentMode: 'cash'
   });
 
-  // Get today's date in YYYY-MM-DD format for min date
+  // Get today's date in YYYY-MM-DD format for max date
   const today = new Date().toISOString().split('T')[0];
 
   const handleSubmit = (e) => {
@@ -34,6 +34,11 @@ const AddMaintenanceModal = ({ onClose, onAdd, showDialog }) => {
       return;
     }
 
+    if (parseFloat(formData.amount) > 10000) {
+      showDialog('Maintenance amount cannot exceed ₹10,000.', 'alert', 'Invalid Amount');
+      return;
+    }
+
     onAdd(formData);
     onClose();
   };
@@ -50,7 +55,7 @@ const AddMaintenanceModal = ({ onClose, onAdd, showDialog }) => {
               required
               placeholder="Enter resident name"
               value={formData.name}
-              onChange={(e) => setFormData({...formData, name: e.target.value})}
+              onChange={(e) => setFormData({...formData, name: e.target.value.replace(/[^a-zA-Z\s]/g, '')})}
             />
           </div>
           <div className="form-group">
@@ -66,12 +71,11 @@ const AddMaintenanceModal = ({ onClose, onAdd, showDialog }) => {
           <div className="form-group">
             <label>Amount (INR) *</label>
             <input
-              type="number"
+              type="text"
               required
-              min="1"
               placeholder="Enter amount"
               value={formData.amount}
-              onChange={(e) => setFormData({...formData, amount: e.target.value})}
+              onChange={(e) => setFormData({...formData, amount: e.target.value.replace(/[^0-9]/g, '')})}
             />
           </div>
           <div className="form-group">

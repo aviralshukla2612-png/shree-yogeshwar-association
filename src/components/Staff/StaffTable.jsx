@@ -90,6 +90,10 @@ const StaffTable = ({ data, onAdd, onUpdate, onDelete, loading: _loading, showDi
   };
 
   const saveEdit = () => {
+    if (editData.phone && editData.phone.length !== 10) {
+      showDialog('Phone number must be exactly 10 digits.', 'alert', 'Validation Error');
+      return;
+    }
     if (editData.salary && parseFloat(editData.salary) <= 0) {
       showDialog('Salary must be greater than 0.', 'alert', 'Validation Error');
       return;
@@ -180,7 +184,7 @@ const StaffTable = ({ data, onAdd, onUpdate, onDelete, loading: _loading, showDi
                     <input
                       type="text"
                       value={editData.name || ''}
-                      onChange={(e) => setEditData({...editData, name: e.target.value})}
+                      onChange={(e) => setEditData({...editData, name: e.target.value.replace(/[^a-zA-Z\s]/g, '')})}
                       className="edit-input name-input"
                       placeholder="Name"
                     />
@@ -204,7 +208,7 @@ const StaffTable = ({ data, onAdd, onUpdate, onDelete, loading: _loading, showDi
                       <input
                         type="text"
                         value={editData.phone || ''}
-                        onChange={(e) => setEditData({...editData, phone: e.target.value})}
+                        onChange={(e) => setEditData({...editData, phone: e.target.value.replace(/\D/g, '').slice(0, 10)})}
                         className="edit-input detail-input"
                         placeholder="Phone"
                       />
