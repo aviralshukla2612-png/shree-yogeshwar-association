@@ -1,0 +1,610 @@
+/* SplashScreen.css - Gold Theme with 360° Rotating Dotted Circle */
+
+.splash-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #0a0a0a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: splashFadeIn 0.6s ease;
+  overflow: hidden;
+}
+
+.splash-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  max-width: 600px;
+  width: 90%;
+  text-align: center;
+}
+
+/* ============================================
+   LOGO WITH 360° ROTATING DOTTED CIRCLE
+   ============================================ */
+
+.splash-logo-wrapper {
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.splash-logo-ring {
+  width: 130px;
+  height: 130px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Rotating Dotted Circle SVG Container */
+.splash-dotted-circle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* ✅ MAIN DOTTED CIRCLE - ROTATES 360° CONTINUOUSLY (TYRE EFFECT) */
+.splash-dotted-path {
+  animation: rotateTyre 8s linear infinite;
+  transform-origin: center;
+}
+
+/* ✅ INNER DOTTED CIRCLE - OPPOSITE DIRECTION (TYRE TREAD EFFECT) */
+.splash-dotted-path-inner {
+  animation: rotateTyreReverse 10s linear infinite;
+  transform-origin: center;
+}
+
+/* ✅ OUTER DOTTED CIRCLE - SAME DIRECTION (DEPTH EFFECT) */
+.splash-dotted-path-outer {
+  animation: rotateTyre 12s linear infinite;
+  transform-origin: center;
+}
+
+/* Tyre Rotation - Clockwise 360° */
+@keyframes rotateTyre {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Tyre Rotation - Counter-Clockwise 360° */
+@keyframes rotateTyreReverse {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+/* Building Logo */
+.splash-logo-icon {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.2rem;
+  color: #D4AF37;
+  position: relative;
+  z-index: 2;
+  box-shadow: 
+    0 0 40px rgba(212, 175, 55, 0.08),
+    inset 0 2px 4px rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(212, 175, 55, 0.1);
+  animation: logoPulse 3s ease-in-out infinite;
+}
+
+.splash-logo-icon::after {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border-radius: 50%;
+  border: 1px solid rgba(212, 175, 55, 0.05);
+}
+
+@keyframes logoPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 40px rgba(212, 175, 55, 0.08);
+  }
+  50% {
+    transform: scale(1.03);
+    box-shadow: 0 0 60px rgba(212, 175, 55, 0.15);
+  }
+}
+
+/* ============================================
+   TITLE WITH TYPING EFFECT
+   ============================================ */
+
+.splash-title-wrapper {
+  margin-bottom: 2rem;
+  min-height: 4.5rem;
+}
+
+.splash-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 0.3rem 0;
+  letter-spacing: 2px;
+  min-height: 3.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.1rem;
+  flex-wrap: wrap;
+  animation: fadeInUp 0.6s ease;
+}
+
+.splash-title .gold-text {
+  background: linear-gradient(135deg, #D4AF37, #F5D76E, #C9A832, #D4AF37);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: goldShimmer 3s ease-in-out infinite;
+}
+
+@keyframes goldShimmer {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.splash-cursor {
+  display: inline-block;
+  font-weight: 300;
+  color: #D4AF37;
+  font-size: 2.2rem;
+  animation: cursorBlink 0.6s step-end infinite;
+  -webkit-text-fill-color: #D4AF37;
+}
+
+.splash-cursor.visible { opacity: 1; }
+.splash-cursor.hidden { opacity: 0; }
+
+@keyframes cursorBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.splash-subtitle {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.15);
+  margin: 0;
+  letter-spacing: 3px;
+  font-weight: 300;
+  animation: fadeInUp 0.8s ease;
+}
+
+/* ============================================
+   LOADING TEXT
+   ============================================ */
+
+.splash-loading-wrapper {
+  margin-bottom: 1.5rem;
+}
+
+.splash-loading-text {
+  font-size: 0.75rem;
+  color: rgba(212, 175, 55, 0.4);
+  letter-spacing: 4px;
+  font-weight: 300;
+  text-transform: uppercase;
+  animation: textPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes textPulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.7; }
+}
+
+/* ============================================
+   PROGRESS BAR
+   ============================================ */
+
+.splash-progress-wrapper {
+  width: 50%;
+  max-width: 280px;
+}
+
+.splash-progress-bar {
+  width: 100%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+
+.splash-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #D4AF37, #F5D76E, #C9A832);
+  background-size: 200% 100%;
+  border-radius: 2px;
+  transition: width 0.3s ease;
+  animation: shimmer 2s linear infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.splash-progress-fill::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  right: 0;
+  width: 15px;
+  height: 6px;
+  background: rgba(245, 215, 110, 0.15);
+  filter: blur(4px);
+  border-radius: 50%;
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+
+@keyframes splashFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(1.02);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+/* Tablet */
+@media (max-width: 992px) {
+  .splash-logo-ring {
+    width: 120px;
+    height: 120px;
+  }
+
+  .splash-logo-icon {
+    width: 55px;
+    height: 55px;
+    font-size: 2rem;
+  }
+
+  .splash-title {
+    font-size: 2rem;
+    min-height: 3rem;
+  }
+
+  .splash-cursor {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .splash-logo-ring {
+    width: 110px;
+    height: 110px;
+  }
+
+  .splash-logo-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 1.8rem;
+  }
+
+  .splash-title {
+    font-size: 1.6rem;
+    min-height: 2.6rem;
+    letter-spacing: 1px;
+  }
+
+  .splash-cursor {
+    font-size: 1.6rem;
+  }
+
+  .splash-subtitle {
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+  }
+
+  .splash-progress-wrapper {
+    width: 60%;
+  }
+
+  .splash-title-wrapper {
+    min-height: 3.5rem;
+  }
+}
+
+/* Mobile Large */
+@media (max-width: 480px) {
+  .splash-content {
+    padding: 1.5rem;
+  }
+
+  .splash-logo-ring {
+    width: 90px;
+    height: 90px;
+  }
+
+  .splash-logo-icon {
+    width: 42px;
+    height: 42px;
+    font-size: 1.5rem;
+  }
+
+  .splash-dotted-circle {
+    width: 90px;
+    height: 90px;
+  }
+
+  .splash-title {
+    font-size: 1.2rem;
+    min-height: 2rem;
+    letter-spacing: 0.5px;
+  }
+
+  .splash-cursor {
+    font-size: 1.2rem;
+  }
+
+  .splash-subtitle {
+    font-size: 0.55rem;
+    letter-spacing: 1.5px;
+  }
+
+  .splash-loading-text {
+    font-size: 0.6rem;
+    letter-spacing: 3px;
+  }
+
+  .splash-progress-wrapper {
+    width: 70%;
+  }
+
+  .splash-logo-wrapper {
+    margin-bottom: 1.5rem;
+  }
+
+  .splash-title-wrapper {
+    margin-bottom: 1.5rem;
+    min-height: 2.8rem;
+  }
+
+  .splash-loading-wrapper {
+    margin-bottom: 1rem;
+  }
+}
+
+/* Mobile Small */
+@media (max-width: 375px) {
+  .splash-content {
+    padding: 1rem;
+  }
+
+  .splash-logo-ring {
+    width: 75px;
+    height: 75px;
+  }
+
+  .splash-logo-icon {
+    width: 35px;
+    height: 35px;
+    font-size: 1.2rem;
+  }
+
+  .splash-dotted-circle {
+    width: 75px;
+    height: 75px;
+  }
+
+  .splash-title {
+    font-size: 1rem;
+    min-height: 1.6rem;
+  }
+
+  .splash-cursor {
+    font-size: 1rem;
+  }
+
+  .splash-subtitle {
+    font-size: 0.45rem;
+    letter-spacing: 1px;
+  }
+
+  .splash-loading-text {
+    font-size: 0.5rem;
+    letter-spacing: 2px;
+  }
+
+  .splash-progress-wrapper {
+    width: 80%;
+  }
+
+  .splash-logo-wrapper {
+    margin-bottom: 1rem;
+  }
+
+  .splash-title-wrapper {
+    margin-bottom: 1rem;
+    min-height: 2.2rem;
+  }
+
+  .splash-loading-wrapper {
+    margin-bottom: 0.8rem;
+  }
+}
+
+/* Extra Small */
+@media (max-width: 320px) {
+  .splash-logo-ring {
+    width: 65px;
+    height: 65px;
+  }
+
+  .splash-logo-icon {
+    width: 30px;
+    height: 30px;
+    font-size: 1rem;
+  }
+
+  .splash-dotted-circle {
+    width: 65px;
+    height: 65px;
+  }
+
+  .splash-title {
+    font-size: 0.85rem;
+    min-height: 1.4rem;
+  }
+
+  .splash-cursor {
+    font-size: 0.85rem;
+  }
+
+  .splash-subtitle {
+    font-size: 0.4rem;
+    letter-spacing: 0.5px;
+  }
+
+  .splash-loading-text {
+    font-size: 0.45rem;
+    letter-spacing: 1.5px;
+  }
+
+  .splash-progress-wrapper {
+    width: 85%;
+  }
+}
+
+/* ============================================
+   LANDSCAPE MODE
+   ============================================ */
+
+@media (max-height: 500px) and (orientation: landscape) {
+  .splash-content {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem;
+    max-width: 90%;
+    padding: 1rem;
+  }
+
+  .splash-logo-wrapper {
+    margin-bottom: 0;
+    flex: 0 0 auto;
+  }
+
+  .splash-logo-ring {
+    width: 70px;
+    height: 70px;
+  }
+
+  .splash-logo-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 1.2rem;
+  }
+
+  .splash-dotted-circle {
+    width: 70px;
+    height: 70px;
+  }
+
+  .splash-title-wrapper {
+    flex: 1;
+    min-height: unset;
+    margin-bottom: 0;
+  }
+
+  .splash-title {
+    font-size: 1rem;
+    min-height: unset;
+  }
+
+  .splash-cursor {
+    font-size: 1rem;
+  }
+
+  .splash-subtitle {
+    font-size: 0.5rem;
+  }
+
+  .splash-loading-wrapper {
+    margin-bottom: 0;
+  }
+
+  .splash-progress-wrapper {
+    width: 100%;
+    max-width: 200px;
+  }
+}
+
+/* ============================================
+   REDUCED MOTION PREFERENCE
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .splash-dotted-path,
+  .splash-dotted-path-inner,
+  .splash-dotted-path-outer,
+  .splash-logo-icon,
+  .splash-title .gold-text,
+  .splash-loading-text,
+  .splash-progress-fill,
+  .splash-cursor {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+
+  .splash-dotted-path,
+  .splash-dotted-path-inner,
+  .splash-dotted-path-outer {
+    animation: none;
+  }
+
+  .splash-cursor {
+    display: none;
+  }
+
+  .splash-progress-fill {
+    animation: none;
+  }
+
+  .splash-container {
+    animation: none;
+  }
+}

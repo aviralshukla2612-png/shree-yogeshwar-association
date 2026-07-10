@@ -24,12 +24,19 @@ import SettingsPage from './components/Settings/SettingsPage';
 import MyProfilePage from './components/Profile/MyProfilePage';
 import Toast from './components/Common/Toast';
 import CustomDialog from './components/Common/CustomDialog';
+import SplashScreen from './components/Splash/SplashScreen';
 import { expensesData } from "./data/expenses";
 import { maintenanceData } from "./data/maintenance";
 import { residentsData } from "./data/residents";
 import { staffData } from "./data/staff";
 
 function App() {
+  // ============================================
+  // SPLASH SCREEN STATE
+  // ============================================
+  
+  const [splashLoading, setSplashLoading] = useState(true);
+
   // ============================================
   // STATE MANAGEMENT
   // ============================================
@@ -59,6 +66,18 @@ function App() {
     { id: 2, resident: 'Jane Smith', issue: 'Power outage', priority: 'High', status: 'Resolved', createdAt: '2026-06-22' },
     { id: 3, resident: 'Mike Johnson', issue: 'Noise complaint', priority: 'Medium', status: 'Pending', createdAt: '2026-07-05' },
   ]);
+
+  // ============================================
+  // SPLASH SCREEN TIMER
+  // ============================================
+  
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setSplashLoading(false);
+    }, 4000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   // ============================================
   // HANDLE WINDOW RESIZE
@@ -418,6 +437,14 @@ function App() {
     { id: 'settings', label: 'Settings', icon: <FaCog /> },
     { id: 'profile', label: 'My Profile', icon: <FaUserCircle /> },
   ];
+
+  // ============================================
+  // SPLASH SCREEN
+  // ============================================
+  
+  if (splashLoading) {
+    return <SplashScreen />;
+  }
 
   // ============================================
   // RENDER
